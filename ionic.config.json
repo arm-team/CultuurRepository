@@ -1,0 +1,7 @@
+{
+  "name": "Cultuur_Project",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
