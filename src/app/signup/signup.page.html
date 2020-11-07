@@ -1,9 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>signup</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  Hello, Signup
+  <form  style="
+          margin-top: 100px;
+          padding: 50px;"
+         #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <ion-item>
+      <ion-label position="floating" color="medium">Email</ion-label>
+      <ion-input type="email" ngModel name="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="medium">Username</ion-label>
+      <ion-input type="text" ngModel name="usename"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="medium">Name</ion-label>
+      <ion-input type="text" ngModel name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="medium">Country</ion-label>
+      <ion-input type="text" ngModel name="country"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="medium">Password</ion-label>
+      <ion-input type="password" ngModel name="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="medium">Confirm Password</ion-label>
+      <ion-input type="password" ngModel name="password"></ion-input>
+    </ion-item>
+    <ion-button type="submit" color="success" expand="block">Create Account</ion-button>
+  </form>
 </ion-content>
