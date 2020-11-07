@@ -5,28 +5,42 @@
          #form="ngForm" (ngSubmit)="onSubmit(form)">
     <ion-item>
       <ion-label position="floating" color="medium">Email</ion-label>
-      <ion-input type="email" ngModel name="email"></ion-input>
+      <ion-input type="email"
+                 ngModel
+                 name="email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating" color="medium">Username</ion-label>
-      <ion-input type="text" ngModel name="usename"></ion-input>
+      <ion-input type="text"
+                 ngModel
+                 name="username"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating" color="medium">Name</ion-label>
-      <ion-input type="text" ngModel name="name"></ion-input>
+      <ion-input type="text"
+                 ngModel
+                 name="name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating" color="medium">Country</ion-label>
-      <ion-input type="text" ngModel name="country"></ion-input>
+      <ion-input type="text"
+                 ngModel
+                 name="country"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating" color="medium">Password</ion-label>
-      <ion-input type="password" ngModel name="password"></ion-input>
+      <ion-input type="password"
+                 ngModel
+                 name="password"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating" color="medium">Confirm Password</ion-label>
-      <ion-input type="password" ngModel name="password"></ion-input>
+      <ion-input type="password"
+                 ngModel
+                 name="password"></ion-input>
     </ion-item>
-    <ion-button type="submit" color="success" expand="block">Create Account</ion-button>
+    <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block">Sign In</ion-button>
+    <ion-title color="medium" size="small" style="font-size: 11px; text-align: center; padding-top: 20px">Have an account?
+      <ion-label routerLink="/signin" color="success" style="font-size: 12px">Sign In</ion-label> </ion-title>
   </form>
 </ion-content>

@@ -2,17 +2,32 @@
   <form
           style="
           margin-top: 180px;
-          padding: 50px;"
+          padding: 60px;"
           #form="ngForm" (ngSubmit)="onSubmit(form)">
+   <ion-text style="margin-bottom: 10px">
+     <h2>Sign In</h2>
+   </ion-text>
+   <ion-text style="color: #9d9fa6; font-size: 12px; margin-top: 0">
+     <p>Welcome to Cultuur App</p>
+   </ion-text>
+    <!--Form Email-->
     <ion-item>
       <ion-label position="floating" color="medium">Email</ion-label>
-      <ion-input type="text" ngModel name="email"></ion-input>
+      <ion-input type="text"
+                 ngModel
+                 name="email"></ion-input>
     </ion-item>
+    <!--Form Password-->
     <ion-item>
       <ion-label position="floating" color="medium">Password</ion-label>
-      <ion-input type="password" ngModel name="password"></ion-input>
+      <ion-input type="password"
+                 ngModel
+                 name="password"></ion-input>
     </ion-item>
+    <!--Button Submit-->
     <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block">Sign In</ion-button>
+    <ion-title color="medium" size="small" style="font-size: 11px; text-align: center; padding-top: 20px">Don't have an account?
+      <ion-label routerLink="/signup" color="success" style="font-size: 12px">Create Account</ion-label> </ion-title>
   </form>
-  <ion-label routerLink="/signup" color="primary">Create Account</ion-label>
+
 </ion-content>
