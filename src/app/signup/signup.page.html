@@ -39,12 +39,12 @@
                        ngModel
                        name="username"
                        required
-                       minlength="8"
+                       minlength="4"
                        #userCtrl="ngModel"></ion-input>
           </ion-item>
           <ion-item *ngIf="!userCtrl.valid && userCtrl.touched">
             <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Username must be eight.</ion-label>
+            <ion-label color="danger" style="font-size: small">Username length must more than four.</ion-label>
           </ion-item>
           <!--Form Name-->
           <ion-item>
@@ -95,11 +95,11 @@
                        minlength="6"
                        #confirmpassCtrl="ngModel"></ion-input>
           </ion-item>
-          <ion-item *ngIf="!confirmpassCtrl.valid && confirmpassCtrl.touched && confirmpassCtrl === passCtrl">
+          <ion-item *ngIf="!confirmpassCtrl.valid && confirmpassCtrl.touched || confirmpassCtrl.value !== passCtrl.value">
             <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Password must be six.</ion-label>
+            <ion-label color="danger" style="font-size: small">Confirm Password doesn't match.</ion-label>
           </ion-item>
-          <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block" [disabled]="!form.valid">Create Account</ion-button>
+          <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block" [disabled]="!form.valid || confirmpassCtrl.value !== passCtrl.value">Create Account</ion-button>
           <ion-title color="medium" size="small" style="font-size: 11px; text-align: center; padding-top: 20px">Have an account?
             <ion-label routerLink="/signin" color="success" style="font-size: 12px">Sign In</ion-label> </ion-title>
         </form>
