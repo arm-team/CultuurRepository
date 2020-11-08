@@ -1,0 +1,19 @@
+.upper-container{
+  height: 200px;
+  background: #7F00FF;
+}
+
+.image-container{
+  background: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  padding: 5px;
+  //transform: translate(150px,100px);
+}
+
+.image-container img{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}

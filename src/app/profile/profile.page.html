@@ -1,9 +1,90 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Username</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="upper-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2" size-md="6" offset-md="3">
+          <div class="image-container">
+            <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg">
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin-top: 35px" class="ion-margin-start">
+        <ion-col class="ion-no-padding">
+          <ion-text class="ion-text-right">Sarah Adinti Putri</ion-text>
+        </ion-col>
+        <ion-col class="ion-no-padding">
+          <ion-icon name="mail"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-start">
+        <ion-col class="ion-no-padding" >
+          <ion-text>22sarah@email.com</ion-text>
+        </ion-col>
+        <ion-col class="ion-no-padding">
+          <ion-icon name="heart"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-start">
+        <ion-col class="ion-no-padding">
+          <ion-text>INDONESIA</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="ion-padding">
+    <div>
+      <h3>All Post</h3>
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col >
+          <ion-list>
+            <ion-item-sliding #insert_ngFor>
+              <ion-item-options side="start">
+                <ion-item-option color="primary" #insert_routerLink_editPost>
+                  <ion-icon name="create" slot="icon-only"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+
+
+              <ion-item #insert_routerLInk_postdetail>
+                <ion-thumbnail slot="start">
+                  <ion-img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                  <h3>Caption</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                  <ion-icon name="heart"></ion-icon> 121 <ion-icon name="chatbox-ellipses"></ion-icon> 11
+                </ion-label>
+              </ion-item>
+
+              <ion-item-options side="end">
+                <ion-item-option color="danger" #click_delete>
+                  <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+
+            </ion-item-sliding>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
 </ion-content>
