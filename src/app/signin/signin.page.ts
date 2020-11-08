@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {AngularFireAuth} from '@angular/fire/auth';
+import {AuthenticationService} from '../services/authentication.service';
+import {ComponentService} from '../services/component.service';
+import {Router} from '@angular/router';
+import firebase from 'firebase';
 
 @Component({
   selector: 'app-signin',
@@ -10,18 +13,30 @@ import {AngularFireAuth} from '@angular/fire/auth';
 export class SigninPage implements OnInit {
 
   constructor(
-    private afAuth: AngularFireAuth
+    private authService: AuthenticationService,
+    private compService: ComponentService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm){
+  async onSubmit(form: NgForm): Promise<void> {
+    await this.compService.showLoading();
     const email = form.value.email.toString();
     const password = form.value.password.toString();
-    this.afAuth.signInWithEmailAndPassword(email, password)
-        .then((res: any) => console.log(res))
-        .catch((error: any) => console.error(error));
+    try {
+      const userCredential: firebase.auth.UserCredential = await this.authService.signin(
+          email,
+          password
+      );
+      this.authService.userId = userCredential.user.uid;
+      await this.compService.hideLoading();
+      await this.router.navigateByUrl('/home');
+    } catch (error) {
+      await this.compService.hideLoading();
+      await this.compService.handleError(error);
+    }
   }
 
 }

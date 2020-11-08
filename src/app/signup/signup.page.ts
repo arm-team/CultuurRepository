@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/auth';
+import {AuthenticationService} from '../services/authentication.service';
+import firebase from 'firebase';
+import {Profile} from '../models/profile.model';
+import {ComponentService} from '../services/component.service';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -9,18 +13,43 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class SignupPage implements OnInit {
 
   constructor(
-    private afAuth: AngularFireAuth
+    private authService: AuthenticationService,
+    private compService: ComponentService,
+    private router: Router
   ) { }
 
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm){
-    const email = form.value.email.toString();
-    const password = form.value.password.toString();
-    this.afAuth.createUserWithEmailAndPassword(email, password)
-        .then((res: any) => console.log(res))
-        .catch((error: any) => console.error(error));
+  async onSubmit(form: NgForm): Promise<void>{
+    await this.compService.showLoading();
+    const iemail = form.value.email.toString();
+    const ipassword = form.value.password.toString();
+    const iusername = form.value.username.toString();
+    const iname = form.value.name.toString();
+    const icountry = form.value.country.toString();
+    const profile: Profile = {
+      countryid: icountry,
+      coverurl: 'https://i.ibb.co/HXNgjQv/cover.png',
+      email: iemail,
+      imageurl: 'https://i.ibb.co/NYR2CH5/image.png',
+      name: iname,
+      username: iusername,
+    };
+
+    try {
+      const userCredential: firebase.auth.UserCredential = await this.authService.signup(
+        iemail,
+        ipassword,
+        profile
+      );
+      this.authService.userId = userCredential.user.uid;
+      await this.compService.hideLoading();
+      await this.router.navigateByUrl('/home');
+    } catch (error) {
+      await this.compService.hideLoading();
+      await this.compService.handleError(error);
+    }
   }
 
 }
