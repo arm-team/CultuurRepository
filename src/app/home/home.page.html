@@ -12,18 +12,46 @@
   </ion-buttons>
 </ion-toolbar>
 <style>
-  .img-slide{
-    opacity: 0.8;
-    display: block;
+  .carousel-text-container{
+    /*box-shadow: inset 0 -40px 100px -40px rgba(0,0,0,0.1);*/
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 20px 50px;
+    /*background: linear-gradient(rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 30%);*/
+  }
+  .centered {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .carousel-title{
+    font-size: 16px;
+    margin: 0;
+  }
+  .carousel-caption{
+    font-size: 12px;
+    margin: 0;
   }
 </style>
 <ion-content>
   <ion-slides class="img-slide" pager="true">
     <ion-slide>
-      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1"/>
+      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1" alt=""/>
+      <div class="carousel-text-container ion-text-left">
+        <p class="carousel-title">Candi Borobudur</p>
+        <p class="carousel-caption">Caption adalah tempat borobudur yang merupakan</p>
+      </div>
     </ion-slide>
     <ion-slide>
-      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1"/>
+      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1" alt=""/>
+      <div class="carousel-text-container ion-text-left">
+        <p class="carousel-title">Candi Borobudur</p>
+        <p class="carousel-caption">Caption adalah tempat borobudur yang merupakan</p>
+      </div>
     </ion-slide>
   </ion-slides>
   <ion-grid>
@@ -39,6 +67,7 @@
           <ion-col size="6">
             <ion-card class="ion-no-padding ion-no-margin">
               <ion-img src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+              <ion-text class="centered">Boro-boro</ion-text>
             </ion-card>
           </ion-col>
         </ion-row>

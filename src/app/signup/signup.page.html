@@ -44,7 +44,7 @@
           </ion-item>
           <ion-item *ngIf="!userCtrl.valid && userCtrl.touched">
             <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Username length must more than four.</ion-label>
+            <ion-label color="danger" style="font-size: small">Username length must four.</ion-label>
           </ion-item>
           <!--Form Name-->
           <ion-item>
@@ -62,12 +62,14 @@
           <!--Form Country-->
           <ion-item>
             <ion-label position="floating" color="medium">Country</ion-label>
-            <ion-select type="text"
-                       ngModel
-                       name="country"
-                       required
-                       #countryCtrl="ngModel">
-              <ion-select-option value="id">INDONESIA</ion-select-option>
+            <ion-select
+                 type="text"
+                 interface="popover"
+                 ngModel
+                 name="country"
+                 required
+                 #countryCtrl="ngModel">
+              <ion-select-option value="id">Indonesia</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item *ngIf="!countryCtrl.valid && countryCtrl.touched">
