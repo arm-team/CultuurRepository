@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {AuthenticationGuard} from './services/authentication.guard';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    redirectTo: 'signin',
+    pathMatch: 'full'
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'signin',
@@ -21,15 +23,18 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'explore',
-    loadChildren: () => import('./explore/explore.module').then( m => m.ExplorePageModule)
+    loadChildren: () => import('./explore/explore.module').then( m => m.ExplorePageModule),
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'post',
-    loadChildren: () => import('./post/post.module').then( m => m.PostPageModule)
+    loadChildren: () => import('./post/post.module').then( m => m.PostPageModule),
+    canActivate: [AuthenticationGuard]
   },
 ];
 
