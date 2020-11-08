@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  today = Date.now();
   constructor(
     private authService: AuthenticationService,
     private router: Router,
