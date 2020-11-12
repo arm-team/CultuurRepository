@@ -62,11 +62,13 @@
           <!--Form Country-->
           <ion-item>
             <ion-label position="floating" color="medium">Country</ion-label>
-            <ion-input type="text"
+            <ion-select type="text"
                        ngModel
                        name="country"
                        required
-                       #countryCtrl="ngModel"></ion-input>
+                       #countryCtrl="ngModel">
+              <ion-select-option value="id">INDONESIA</ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-item *ngIf="!countryCtrl.valid && countryCtrl.touched">
             <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
