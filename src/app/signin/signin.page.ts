@@ -26,7 +26,7 @@ export class SigninPage implements OnInit {
     const email = form.value.email.toString();
     const password = form.value.password.toString();
     try {
-      const userCredential: firebase.auth.UserCredential = await this.authService.signin(
+      const userCredential: firebase.auth.UserCredential = await this.authService.signIn(
           email,
           password
       );

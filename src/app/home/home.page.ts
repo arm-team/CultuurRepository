@@ -13,8 +13,9 @@ export class HomePage {
     private authService: AuthenticationService,
     private router: Router,
   ) {}
-  async onSignout(){
-    await this.authService.signout();
+
+  async signOut(){
+    await this.authService.signOut();
     await this.router.navigateByUrl('/signin');
   }
 }

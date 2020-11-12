@@ -38,7 +38,7 @@ export class SignupPage implements OnInit {
     };
 
     try {
-      const userCredential: firebase.auth.UserCredential = await this.authService.signup(
+      const userCredential: firebase.auth.UserCredential = await this.authService.signUp(
         iemail,
         ipassword,
         profile

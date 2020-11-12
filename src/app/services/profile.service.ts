@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {AuthenticationService} from './authentication.service';
 import {Observable} from 'rxjs';
 import firebase from 'firebase';
 import {Profile} from '../models/profile.model';
+import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  private userProfile: AngularFirestoreDocument<Profile>;
   private currentUser: firebase.User;
+  private listRef: AngularFireList<Profile> = null;
+  private dbPath = '/profile/';
+  private profile: Observable<any>;
   constructor(
-      private firestore: AngularFirestore,
+      private db: AngularFireDatabase,
       private authService: AuthenticationService
-  ) {}
+  ) { this.listRef = db.list(this.dbPath); }
 
-  async getUserProfile(): Promise<Observable<Profile>> {
+  async getProfile(key?: string){
     const user: firebase.User = await this.authService.getUser();
     this.currentUser = user;
-    this.userProfile = this.firestore.doc(`profile/${user.uid}`);
-    return this.userProfile.valueChanges();
+    if (key === undefined){
+      key = user.uid;
+      console.log('key nya undefined');
+    }
+    this.profile = await this.db.object(`profile/${key}`).valueChanges();
+    return this.profile;
   }
 
   // updateName(fullName: string): Promise<void> {
