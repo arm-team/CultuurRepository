@@ -28,11 +28,11 @@ export class AppComponent {
       this.splashScreen.hide();
     });
     // Authentication Check
-    const user = await this.authService.getUser();
-    if (user) {
-      await this.router.navigateByUrl('/home');
-    } else {
-      await this.router.navigateByUrl('/signin');
-    }
+    // const user = await this.authService.getUser();
+    // if (user) {
+    //   await this.router.navigateByUrl('/home');
+    // } else {
+    //   await this.router.navigateByUrl('/signin');
+    // }
   }
 }
