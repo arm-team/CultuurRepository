@@ -35,7 +35,8 @@ const routes: Routes = [
     path: 'post',
     loadChildren: () => import('./post/post.module').then( m => m.PostPageModule),
     canActivate: [AuthenticationGuard]
-  },  {
+  },
+  {
     path: 'add-post',
     loadChildren: () => import('./add-post/add-post.module').then( m => m.AddPostPageModule)
   },
