@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PostfeedPage } from './postfeed.page';
+import { EditPostPage } from './edit-post.page';
 
-describe('PostfeedPage', () => {
-  let component: PostfeedPage;
-  let fixture: ComponentFixture<PostfeedPage>;
+describe('EditPostPage', () => {
+  let component: EditPostPage;
+  let fixture: ComponentFixture<EditPostPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostfeedPage ],
+      declarations: [ EditPostPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PostfeedPage);
+    fixture = TestBed.createComponent(EditPostPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

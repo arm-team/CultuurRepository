@@ -7,14 +7,6 @@ const routes: Routes = [
     path: '',
     component: HomePage,
   },
-  {
-    path: 'postfeed',
-    loadChildren: () => import('./postfeed/postfeed.module').then( m => m.PostfeedPageModule)
-  },
-  {
-    path: 'addpost',
-    loadChildren: () => import('./addpost/addpost.module').then( m => m.AddpostPageModule)
-  }
 ];
 
 @NgModule({
