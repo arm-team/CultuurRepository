@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {AuthenticationGuard} from './services/authentication.guard';
+import {SignGuard} from './services/sign.guard';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'signin',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [SignGuard]
   },
   {
     path: 'home',
@@ -15,11 +17,13 @@ const routes: Routes = [
   },
   {
     path: 'signin',
-    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule)
+    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule),
+    canActivate: [SignGuard]
   },
   {
     path: 'signup',
-    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule),
+    canActivate: [SignGuard]
   },
   {
     path: 'profile',
