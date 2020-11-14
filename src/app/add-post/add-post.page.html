@@ -10,18 +10,18 @@
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2">
         <ion-card>
-          <ion-card-header>
+         <ion-card-header>
             <!--UPLOAD IMAGE FROM DEVICE-->
             <ion-buttons>
               <ion-button>
-                <ion-icon name="image-outline" slot="icon-only"></ion-icon>
+                <ion-icon name="image" slot="icon-only"></ion-icon>
               </ion-button>
-              <ion-title>UPLOAD IMAGE</ion-title>
+              <ion-card-subtitle>Upload Your Image :)</ion-card-subtitle>
             </ion-buttons>
           </ion-card-header>
         </ion-card>
         <!--FORM-->
-        <form style="padding: 60px;" #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <form style="padding: 15px 60px 15px 60px;" #form="ngForm" (ngSubmit)="onSubmit(form)">
           <ion-item>
             <ion-label position="floating" color="medium">Title</ion-label>
             <ion-input type="text"
@@ -64,6 +64,9 @@
           <!--Button Submit-->
           <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block" [disabled]="!form.valid">Add Post</ion-button>
         </form>
+        <div class="ion-text-center ion-padding-top" style="width: 100%;">
+          <img class="" src="./assets/addpost.svg" alt="icon" style="max-height: 150px; max-width: 150px;"/>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
