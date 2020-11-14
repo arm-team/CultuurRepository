@@ -43,11 +43,13 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating" color="medium">Location</ion-label>
-            <ion-input type="text"
-                       ngModel
+            <ion-select type="text"
+                       ngModel interface="popover"
                        name="location"
                        required
-                       #locationCtrl="ngModel"></ion-input>
+                       #locationCtrl="ngModel">
+              <ion-select-option value="id">Kabupaten Gunung Kidul</ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-item *ngIf="!locationCtrl.valid && locationCtrl.touched">
             <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
