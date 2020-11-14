@@ -2,8 +2,9 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-button routerLink="/profile/edit-profile"><ion-icon name="create" slot="icon-only"></ion-icon> </ion-button>
     </ion-buttons>
-    <ion-title>Username</ion-title>
+    <ion-title>{{profile?.username}}</ion-title>
     <ion-buttons slot="primary">
       <ion-button>
         <ion-icon name="log-out"></ion-icon>
@@ -13,16 +14,17 @@
 </ion-header>
 
 <ion-content>
+  <!--Container Atas-->
   <div class="upper-container">
     <ion-grid>
-      <ion-row>
+      <ion-row style="margin-top: 20px">
         <ion-col size="12" offset="5">
           <div class="image-container">
             <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg">
           </div>
         </ion-col>
       </ion-row>
-      <ion-row style="margin-top: 35px" class="ion-margin-horizontal">
+      <ion-row style="margin-top: 10px" class="ion-margin-horizontal">
         <ion-col size="6" class="ion-no-padding">
           <ion-text class="ion-text-right">{{ profile?.name }}</ion-text>
         </ion-col>
@@ -33,7 +35,7 @@
       </ion-row>
       <ion-row class="ion-margin-horizontal">
         <ion-col size="6" class="ion-no-padding" >
-          <ion-text>22sarah@email.com</ion-text>
+          <ion-text>{{profile?.email}}</ion-text>
         </ion-col>
         <ion-col size="6" class="ion-no-padding">
           <ion-label class="ion-float-right"> 50</ion-label>
@@ -42,76 +44,57 @@
       </ion-row>
       <ion-row class="ion-margin-start">
         <ion-col size="6" class="ion-no-padding">
-          <ion-text>INDONESIA</ion-text>
+          <ion-text>Indonesia</ion-text>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 
+  <!--All post + button Add Post-->
   <ion-item>
-    <ion-label>All Items</ion-label>
-    <ion-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-button>
+    <ion-label>All Posts</ion-label>
+    <ion-buttons>
+      <ion-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-item>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col >
+  <!--Tampilan Postingan user-->
+  <ion-item-sliding #slidingItem>
+    <ion-item-options side="start">
+      <ion-item-option color="danger" (click)="slidingItem.close()">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
 
-          <!--<ion-item-sliding #insert_ngFor>
-            <ion-item-options side="start">
-              <ion-item-option color="primary" #insert_routerLink_editPost>
-                <ion-icon name="create" slot="icon-only"></ion-icon>
-              </ion-item-option>
-            </ion-item-options>
+    <ion-item class="ion-no-padding ion-no-margin">
+      <ion-card class="ion-no-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4" class="ion-no-padding">
+              <ion-img src="https://cdn.idntimes.com/content-images/community/2019/12/13734533-223638001370544-1005550621-n-97b29cab9dc34805b1f6ad1679e6822a_600x400.jpg"></ion-img>
+            </ion-col>
+            <ion-col size="8">
+              <ion-text style="padding: 2px;text-align: justify;margin-top: 5px;overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 8; line-height: 16px; max-height: 200px; -webkit-box-orient: vertical">ini caption: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</ion-text>
+              <div class="ion-text-right">
+                <ion-icon name="heart"></ion-icon> 121
+                <ion-icon name="chatbox-ellipses"></ion-icon> 11
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-item>
 
+      <ion-item-options>
+        <ion-item-option color="primary" #insert_routerLink_editPost>
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
 
-            <ion-item #insert_routerLInk_postdetail>
-              <ion-thumbnail slot="start">
-                <ion-img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg"></ion-img>
-              </ion-thumbnail>
-              <ion-label>
-                <h3>Caption</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <ion-icon name="heart"></ion-icon> 121 <ion-icon name="chatbox-ellipses"></ion-icon> 11
-              </ion-label>
-            </ion-item>
-
-            <ion-item-options side="end">
-              <ion-item-option color="danger" #click_delete>
-                <ion-icon slot="icon-only" name="trash"></ion-icon>
-              </ion-item-option>
-            </ion-item-options>
-
-          </ion-item-sliding>-->
-          <ion-card>
-
-
-            <!--<ion-list class="ion-float-right">
-              <ion-icon name="heart"></ion-icon> 121
-              <ion-icon  name="chatbox-ellipses"></ion-icon> 11
-            </ion-list>-->
-            <ion-grid>
-              <ion-row>
-                <ion-col size="4">
-                  <ion-img src="https://cdn.idntimes.com/content-images/community/2019/12/13734533-223638001370544-1005550621-n-97b29cab9dc34805b1f6ad1679e6822a_600x400.jpg"></ion-img>
-                </ion-col>
-                <ion-col size="8">
-                  <ion-text style="padding: 2px;text-align: justify;margin-top: 5px;overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 8; line-height: 16px; max-height: 200px; -webkit-box-orient: vertical">ini caption: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</ion-text>
-                  <div class="ion-text-right">
-                    <ion-icon name="heart"></ion-icon> 121
-                    <ion-icon  name="chatbox-ellipses"></ion-icon> 11
-                  </div>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-
-          </ion-card>
-
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  </ion-item-sliding>
 
 
 </ion-content>
