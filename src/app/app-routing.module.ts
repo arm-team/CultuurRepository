@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {AuthenticationGuard} from './services/authentication.guard';
 import {SignGuard} from './services/sign.guard';
+import {AuthenticationGuard} from './services/authentication.guard';
 
 const routes: Routes = [
   {
@@ -9,11 +9,6 @@ const routes: Routes = [
     redirectTo: 'signin',
     pathMatch: 'full',
     canActivate: [SignGuard]
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canActivate: [AuthenticationGuard]
   },
   {
     path: 'signin',
@@ -26,29 +21,10 @@ const routes: Routes = [
     canActivate: [SignGuard]
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule),
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule),
     canActivate: [AuthenticationGuard]
   },
-  {
-    path: 'explore',
-    loadChildren: () => import('./explore/explore.module').then( m => m.ExplorePageModule),
-    canActivate: [AuthenticationGuard]
-  },
-  {
-    path: 'post',
-    loadChildren: () => import('./post/post.module').then( m => m.PostPageModule),
-    canActivate: [AuthenticationGuard]
-  },
-  {
-    path: 'add-post',
-    loadChildren: () => import('./add-post/add-post.module').then( m => m.AddPostPageModule)
-  },
-  {
-    path: 'edit-post',
-    loadChildren: () => import('./edit-post/edit-post.module').then( m => m.EditPostPageModule)
-  },
-
 ];
 
 @NgModule({

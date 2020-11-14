@@ -21,7 +21,7 @@ export class SignGuard implements CanActivate {
           resolve(true);
         } else {
           reject('Already logged in');
-          await this.router.navigateByUrl('/home');
+          await this.router.navigateByUrl('/tabs/home');
         }
       } catch (error) {
         reject(error);

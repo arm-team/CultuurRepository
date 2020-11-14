@@ -1,9 +1,44 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>explore</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<style>
+  .header-container{
+    padding: 32px 32px 16px 32px;
+  }
+  .header-container ion-text{
+    font-size: 11px;
+    color: #9d9fa6;
+  }
+  .view-container h4{
+    margin: 0;
+    padding: 16px 32px 16px 32px;
+  }
+  div[scrollx=true] {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .scroll-item {
+    flex: 0 0 auto;
+    width: 50%;
+    height: auto;
+    padding: 0 8px 0 8px;
+  }
+</style>
 <ion-content>
+  <div class="header-container">
+    <ion-searchbar class="ion-no-padding ion-padding-bottom" placeholder="Search culture destination"></ion-searchbar>
+    <h4 class="ion-no-margin">Explore</h4>
+    <ion-text>Yogyakarta, Kota Yogyakarta, Daerah</ion-text>
+  </div>
+  <div class="maps-container">
+    <img style="width: 100%; height: auto" src="{{srcMaps}}"/>
+  </div>
+  <div class="view-container">
+    <h4>Favorite Culture Destination</h4>
+    <div class="scroll" scrollX="true">
+      <ion-img class="scroll-item" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+      <ion-img class="scroll-item" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+      <ion-img class="scroll-item" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+      <ion-img class="scroll-item" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+    </div>
+  </div>
 
 </ion-content>
