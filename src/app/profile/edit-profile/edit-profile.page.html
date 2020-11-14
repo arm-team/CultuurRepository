@@ -1,8 +1,138 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/profile"></ion-back-button>
+    </ion-buttons>
     <ion-title>edit-profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="upper-container">
+    <ion-grid>
+      <ion-row style="margin-top: 30px">
+        <ion-col size="12" offset="5">
+          <div class="image-container">
+            <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg">
+          </div>
+          <ion-buttons>
+            <ion-button><ion-icon name="add"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col size="12" >
+          <ion-buttons class="ion-float-right">
+            <ion-button>
+            <ion-icon name="image"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <form  style="
+          margin-top: -50px;
+          padding: 60px;"
+               #form="ngForm" (ngSubmit)="onSubmit(form)">
+          <ion-text style="margin-bottom: 10px;">
+            <h2><b>Edit Account</b></h2>
+          </ion-text>
+          <ion-text style="color: #9d9fa6; font-size: 12px;">
+            <p>Change your profile below.</p>
+          </ion-text>
+          <!--Form Email-->
+          <ion-item>
+            <ion-label position="floating" color="medium">Email</ion-label>
+            <ion-input type="email"
+                       ngModel
+                       name="email"
+                       required
+                       email
+                       #emailCtrl="ngModel" disabled></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
+            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
+            <ion-label color="danger" style="font-size: small">Should be a valid email address.</ion-label>
+          </ion-item>
+          <!--Form Username-->
+          <ion-item>
+            <ion-label position="floating" color="medium">Username</ion-label>
+            <ion-input type="text"
+                       ngModel
+                       name="username"
+                       required
+                       minlength="4"
+                       #userCtrl="ngModel"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!userCtrl.valid && userCtrl.touched">
+            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
+            <ion-label color="danger" style="font-size: small">Username length must four.</ion-label>
+          </ion-item>
+          <!--Form Name-->
+          <ion-item>
+            <ion-label position="floating" color="medium">Name</ion-label>
+            <ion-input type="text"
+                       ngModel
+                       name="name"
+                       required
+                       #nameCtrl="ngModel"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
+            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
+            <ion-label color="danger" style="font-size: small">Name must be filled in correctly.</ion-label>
+          </ion-item>
+          <!--Form Country-->
+          <ion-item>
+            <ion-label position="floating" color="medium">Country</ion-label>
+            <ion-select
+                    type="text"
+                    interface="popover"
+                    ngModel
+                    name="country"
+                    required
+                    #countryCtrl="ngModel">
+              <ion-select-option value="id">Indonesia</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf="!countryCtrl.valid && countryCtrl.touched">
+            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
+            <ion-label color="danger" style="font-size: small">Country must be filled in correctly.</ion-label>
+          </ion-item>
+          <!--Form Password-->
+          <ion-item>
+            <ion-label position="floating" color="medium">Password</ion-label>
+            <ion-input type="password"
+                       ngModel
+                       name="password"
+                       required
+                       minlength="6"
+                       #passCtrl="ngModel" disabled></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!passCtrl.valid && passCtrl.touched">
+            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
+            <ion-label color="danger" style="font-size: small">Password must be six.</ion-label>
+          </ion-item>
+          <!--Form Confirm Password-->
+          <ion-item>
+            <ion-label position="floating" color="medium">Confirm Password</ion-label>
+            <ion-input type="password"
+                       ngModel
+                       name="confirmPass"
+                       minlength="6"
+                       #confirmpassCtrl="ngModel" disabled></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!confirmpassCtrl.valid && confirmpassCtrl.touched || confirmpassCtrl.value !== passCtrl.value">
+            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
+            <ion-label color="danger" style="font-size: small">Confirm Password doesn't match.</ion-label>
+          </ion-item>
+          <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block" [disabled]="!form.valid || confirmpassCtrl.value !== passCtrl.value">Edit Account</ion-button>
+
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
