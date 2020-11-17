@@ -1,9 +1,63 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>view</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<style>
+  .title-container{
+    padding: 8px 8px 8px 8px;
+  }
+</style>
 <ion-content>
-
+  <ion-fab slot="fixed">
+    <ion-back-button defaultHref="/tabs/explore"></ion-back-button>
+  </ion-fab>
+  <ion-slides pager="true">
+    <ion-back-button style="position: absolute; top: 0;" defaultHref="/tabs/explore"></ion-back-button>
+    <ion-slide>
+      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1" alt=""/>
+    </ion-slide>
+    <ion-slide>
+      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1" alt=""/>
+    </ion-slide>
+    <ion-slide>
+      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1" alt=""/>
+    </ion-slide>
+    <ion-slide>
+      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1" alt=""/>
+    </ion-slide>
+  </ion-slides>
+  <ion-row class="title-container">
+    <ion-col size="6" class="ion-text-left">
+      <h4 class="ion-no-margin">Candi Borobudur</h4>
+    </ion-col>
+    <ion-col size="6" class="ion-text-right">
+      <ion-text>Rating</ion-text>
+    </ion-col>
+  </ion-row>
+  <div style="padding: 8px 16px; width: 100%; border-style: solid; border-width: 1px 0; border-color: #e4e4e4">
+    <ion-text style="font-size: 12px">Jl. Raya Solo - Yogyakarta No.16, Kranggan, Bokoharjo, Kec. Prambanan, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55571</ion-text>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <h4 class="ion-no-margin">All Post</h4>
+      </ion-col>
+      <ion-col size="6" routerLink="/tabs/post">
+        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
+          <ion-img src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" routerLink="/tabs/post">
+        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
+          <ion-img src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" routerLink="/tabs/post">
+        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
+          <ion-img src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" routerLink="/tabs/post">
+        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
+          <ion-img src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

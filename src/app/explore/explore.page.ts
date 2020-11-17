@@ -13,7 +13,7 @@ export class ExplorePage implements OnInit {
   private maptypeMaps = '&maptype='; // Type Maps default = roadmaps
   private keyMaps = '&key='; // API Key
   private apiKey = 'AIzaSyAF3jp8zUqdCjWlbU6vN6bStg4L2y_JSN8'; // Your API Key
-  private srcMaps = this.baseMaps + this.centerMaps + 'Yogyakarta' + this.zoomMaps + '13' + this.sizeMaps + '720x360' + this.maptypeMaps + 'roadmaps' + this.keyMaps + this.apiKey;
+  srcMaps = this.baseMaps + this.centerMaps + 'Yogyakarta' + this.zoomMaps + '13' + this.sizeMaps + '720x360' + this.maptypeMaps + 'roadmaps' + this.keyMaps + this.apiKey;
   constructor() { }
 
   ngOnInit() {
