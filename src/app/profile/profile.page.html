@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/home"></ion-back-button>
-      <ion-button routerLink="/profile/edit-profile"><ion-icon name="create" slot="icon-only"></ion-icon> </ion-button>
+      <ion-button routerLink="/tabs/profile/edit-profile"><ion-icon name="create" slot="icon-only"></ion-icon> </ion-button>
     </ion-buttons>
     <ion-title>{{profile?.username}}</ion-title>
     <ion-buttons slot="primary">
@@ -13,9 +13,17 @@
   </ion-toolbar>
 </ion-header>
 
+<style>
+  .upper-container{
+    height: 200px;
+    background-image: url("https://akcdn.detik.net.id/community/media/visual/2020/03/20/b86bb4c8-f0b2-4771-83f3-57b723d5ccd4_169.jpeg?w=700&q=90");
+  }
+
+</style>
+
 <ion-content>
   <!--Container Atas-->
-  <div class="upper-container">
+  <div class="upper-container ">
     <ion-grid>
       <ion-row style="margin-top: 20px">
         <ion-col size="12" offset="5">
@@ -49,6 +57,7 @@
       </ion-row>
     </ion-grid>
   </div>
+
 
   <!--All post + button Add Post-->
   <ion-item>
