@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Profile} from '../models/profile.model';
+import {ProfileService} from '../services/profile.service';
 
 @Component({
   selector: 'app-post',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post.page.scss'],
 })
 export class PostPage implements OnInit {
-
-  constructor() { }
+  profile: Profile;
+  constructor(
+      private profileServ: ProfileService,
+  ) { }
 
   ngOnInit() {
+    this.profileServ.getProfile().then(res => res.subscribe(r => this.profile = r));
   }
 
 }
