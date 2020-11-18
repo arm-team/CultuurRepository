@@ -17,6 +17,13 @@
   .upper-container{
     height: 200px;
     background-image: url("https://akcdn.detik.net.id/community/media/visual/2020/03/20/b86bb4c8-f0b2-4771-83f3-57b723d5ccd4_169.jpeg?w=700&q=90");
+    background-size: cover;
+      background-position: 50%;
+  }
+  .image-container-thumbnail{
+    width: 120px;
+    height: 160px;
+    background: url("https://cdn.idntimes.com/content-images/community/2019/12/13734533-223638001370544-1005550621-n-97b29cab9dc34805b1f6ad1679e6822a_600x400.jpg") 50% 50% no-repeat;
   }
 
 </style>
@@ -63,7 +70,7 @@
   <ion-item>
     <ion-label>All Posts</ion-label>
     <ion-buttons>
-      <ion-button>
+      <ion-button routerLink="/tabs/add-post">
         <ion-icon name="add"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -83,7 +90,9 @@
         <ion-grid>
           <ion-row>
             <ion-col size="4" class="ion-no-padding">
-              <ion-img src="https://cdn.idntimes.com/content-images/community/2019/12/13734533-223638001370544-1005550621-n-97b29cab9dc34805b1f6ad1679e6822a_600x400.jpg"></ion-img>
+              <div class="image-container-thumbnail">
+
+              </div>
             </ion-col>
             <ion-col size="8">
               <ion-text style="padding: 2px;text-align: justify;margin-top: 5px;overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 8; line-height: 16px; max-height: 200px; -webkit-box-orient: vertical">ini caption: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</ion-text>
