@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {AuthenticationService} from '../services/authentication.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +7,5 @@ import {Router} from '@angular/router';
 })
 export class HomePage {
   today = Date.now();
-  constructor(
-    private authService: AuthenticationService,
-    private router: Router,
-  ) {}
-
-  async signOut(){
-    await this.authService.signOut();
-    await this.router.navigateByUrl('/signin');
-  }
+  constructor() {}
 }
