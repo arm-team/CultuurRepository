@@ -18,6 +18,9 @@ export class ProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
     this.profileServ.getProfile().then(res => res.subscribe(r => this.profile = r));
   }
 
