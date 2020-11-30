@@ -8,101 +8,62 @@
     CULTUUR
   </ion-title>
 </ion-toolbar>
-<style>
-  .filter-blur{
-    -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
-    filter: blur(2px);
-  }
-  .carousel-text-container{
-    color: white;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 5px 20px 50px;
-  }
-  .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .carousel-title{
-    font-style: italic;
-    margin: 0;
-  }
-  .carousel-caption{
-    font-size: 12px;
-    margin: 0;
-    max-lines: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    -webkit-box-orient: vertical;
-  }
-  .carousel-caption:active{
-    -webkit-line-clamp: 5; /* number of lines to show */
-  }
-</style>
 <ion-content>
-  <ion-slides pager="true">
-    <ion-slide>
-      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1" alt=""/>
-      <div class="carousel-text-container ion-text-left">
-        <h3 class="carousel-title"><b>Candi Borobudur</b></h3>
-        <p class="carousel-caption">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <img src="https://i2.wp.com/borobudurnews.com/wp-content/uploads/2020/06/tribun.jpg?fit=1081%2C610&ssl=1" alt=""/>
-      <div class="carousel-text-container ion-text-left">
-        <h3 class="carousel-title">Candi Borobudur</h3>
-        <p class="carousel-caption">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-      </div>
-    </ion-slide>
-  </ion-slides>
-  <div class="ion-margin">
-    <h4 style="margin: 0;">Trending Culture</h4>
-    <ion-text style="font-size: 12px; color: #9d9fa6">{{today | date:  'EEEE, MMMM d, y'}}</ion-text>
+  <div *ngIf="spots">
+    <ion-slides pager="true">
+      <ng-template ngFor let-spot [ngForOf]="spots" let-i="index">
+        <ion-slide *ngIf="i<3">
+          <img src="{{spot.imageurl}}" alt="image" style="width: 100%; height: auto;"/>
+          <div class="carousel-text-container ion-text-left">
+            <h3 class="carousel-title"><b>{{spot.name}}</b></h3>
+            <p class="carousel-caption">{{spot.caption}}</p>
+          </div>
+        </ion-slide>
+      </ng-template>
+    </ion-slides>
+    <div class="ion-margin">
+      <h4 style="margin: 0;">Trending Culture</h4>
+      <ion-text style="font-size: 12px; color: #9d9fa6">{{today | date:  'EEEE, MMMM d, y'}}</ion-text>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;" routerLink="/tabs/post">
+            <ion-img class="filter-blur" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+            <div class="centered ion-text-center" style="width: 100%; color: white;">
+              <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
+              <ion-text style="font-size: 10px; font-style: italic;">Daerah Istimewa Yogyakarta</ion-text>
+            </div>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
+            <ion-img class="filter-blur" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+            <div class="centered ion-text-center" style="width: 100%; color: white;">
+              <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
+              <ion-text style="font-size: 10px; font-style: italic;">Daerah Istimewa Yogyakarta</ion-text>
+            </div>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
+            <ion-img class="filter-blur" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+            <div class="centered ion-text-center" style="width: 100%; color: white;">
+              <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
+              <ion-text style="font-size: 10px; font-style: italic;">Daerah Istimewa Yogyakarta</ion-text>
+            </div>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
+            <ion-img class="filter-blur" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
+            <div class="centered ion-text-center" style="width: 100%; color: white;">
+              <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
+              <ion-text style="font-size: 10px; font-style: italic;">Daerah Istimewa Yogyakarta</ion-text>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6">
-        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;" routerLink="/tabs/post">
-          <ion-img class="filter-blur" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
-          <div class="centered ion-text-center" style="width: 100%; color: white;">
-            <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
-            <ion-text style="font-size: 10px; font-style: italic;">Daerah Istimewa Yogyakarta</ion-text>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
-          <ion-img class="filter-blur" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
-          <div class="centered ion-text-center" style="width: 100%; color: white;">
-            <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
-            <ion-text style="font-size: 10px; font-style: italic;">Daerah Istimewa Yogyakarta</ion-text>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
-          <ion-img class="filter-blur" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
-          <div class="centered ion-text-center" style="width: 100%; color: white;">
-            <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
-            <ion-text style="font-size: 10px; font-style: italic;">Daerah Istimewa Yogyakarta</ion-text>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
-          <ion-img class="filter-blur" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
-          <div class="centered ion-text-center" style="width: 100%; color: white;">
-            <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
-            <ion-text style="font-size: 10px; font-style: italic;">Daerah Istimewa Yogyakarta</ion-text>
-          </div>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 </ion-content>

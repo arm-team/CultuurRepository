@@ -25,3 +25,38 @@
 #container a {
   text-decoration: none;
 }
+
+.filter-blur{
+  -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
+  filter: blur(2px);
+}
+.carousel-text-container{
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 5px 20px 50px;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.carousel-title{
+  font-style: italic;
+  margin: 0;
+}
+.carousel-caption{
+  font-size: 12px;
+  margin: 0;
+  max-lines: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+.carousel-caption:active{
+  -webkit-line-clamp: 5; /* number of lines to show */
+}
