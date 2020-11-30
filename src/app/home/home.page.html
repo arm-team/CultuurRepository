@@ -31,8 +31,8 @@
     <ion-grid>
       <ion-row>
         <ion-col size="6" *ngFor="let spot of spots">
-          <ion-card class="ion-no-padding ion-no-margin card" routerLink="/tabs/post/{{spot.key}}">
-            <ion-img class="card-image filter-blur black-transparent" src="{{spot.imageurl}}"></ion-img>
+          <ion-card class="ion-no-padding ion-no-margin card" routerLink="post/{{spot.key}}">
+            <ion-img class="card-image black-transparent" src="{{spot.imageurl}}"></ion-img>
             <div class="centered ion-text-center" style="width: 100%; color: white;">
               <h6 class="ion-no-margin"><b>{{spot.name}}</b></h6>
               <ion-text style="font-size: 10px; font-style: italic;">{{findRegion(spot.regionid).name}}</ion-text>
