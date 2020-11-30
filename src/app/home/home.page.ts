@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {DestinationService} from '../services/destination.service';
-import {Spot} from '../models/destination.model';
-import {ComponentService} from '../services/component.service';
+import {Country, Region, Spot} from '../models/destination.model';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -10,18 +10,52 @@ import {ComponentService} from '../services/component.service';
 })
 export class HomePage {
   today = Date.now();
+  countries: Country[];
+  regions: Region[];
   spots: Spot[];
   constructor(
     private destinationServ: DestinationService,
-    private compService: ComponentService,
   ) {}
   // tslint:disable-next-line:use-lifecycle-interface
   async ngOnInit(){
-    await this.compService.showLoading('Loading page');
-    await this.destinationServ.getSpot('id', 'diy')
-        .then(res => {
-          res.subscribe(r => { this.spots = r; console.log(this.spots); });
-          this.compService.hideLoading();
+    await this.destinationServ.getCountry().snapshotChanges()
+      .pipe(
+          map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
+      ).subscribe(data => {
+          this.countries = data;
+          console.log(data);
+      });
+
+    await this.destinationServ.getRegion().snapshotChanges()
+      .pipe(
+          map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
+      ).subscribe(data => {
+          this.regions = data;
+          console.log(data);
+      });
+    await this.destinationServ.getSpot().snapshotChanges()
+        .pipe(
+            map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
+        ).subscribe(data => {
+            this.spots = data;
+            console.log(data);
         });
+  }
+  findCountry(key: string){
+    return this.countries.find(country => {
+        return country.key === key;
+    });
+  }
+
+  findRegion(key: string){
+    return this.regions.find(region => {
+      return region.key === key;
+    });
+  }
+
+  findSpot(key: string){
+    return this.spots.find(spot => {
+        return spot.key === key;
+    });
   }
 }

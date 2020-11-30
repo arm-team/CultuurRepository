@@ -1,24 +1,28 @@
 export interface Country{
+  key: string;
   name: string;
-  region: Region[];
 }
 
 export interface Region{
+  key: string;
+  countryid: string;
   name: string;
   mapurl: string;
-  spot: Spot[];
 }
 
 export interface Spot{
+  key: string;
   address: string;
   caption: string;
   imageurl: string;
   mapurl: string;
   name: string;
-  rate: Rate[];
+  regionid: string;
 }
 
 export interface Rate{
+  key: string;
   rating: number;
+  spotid: string;
   uid: string;
 }
