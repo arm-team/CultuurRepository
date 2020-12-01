@@ -1,4 +1,5 @@
 export interface Post{
+  key: string;
   caption: string;
   imageurl: string;
   regionid: string;

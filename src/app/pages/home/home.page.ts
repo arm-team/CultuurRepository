@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {DestinationService} from '../../services/destination.service';
 import {Country, Region, Spot} from '../../models/destination.model';
 import {map} from 'rxjs/operators';
+import {Post} from '../../models/post.model';
+import {PostService} from '../../services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +15,10 @@ export class HomePage {
   countries: Country[];
   regions: Region[];
   spots: Spot[];
+  posts: Post[];
   constructor(
     private destinationServ: DestinationService,
+    private postServ: PostService,
   ) {}
   // tslint:disable-next-line:use-lifecycle-interface
   async ngOnInit(){
@@ -40,6 +44,13 @@ export class HomePage {
             this.spots = data;
             console.log(data);
         });
+    await this.postServ.getPost().snapshotChanges()
+        .pipe(
+            map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
+        ).subscribe(data => {
+            this.posts = data;
+            console.log(data);
+        });
   }
   findCountry(key: string){
     return this.countries.find(country => {
@@ -56,6 +67,12 @@ export class HomePage {
   findSpot(key: string){
     return this.spots.find(spot => {
         return spot.key === key;
+    });
+  }
+
+  findPost(spotid: string){
+    return this.posts.find(post => {
+        return post.spotid === spotid;
     });
   }
 }
