@@ -12,17 +12,17 @@ const routes: Routes = [
   },
   {
     path: 'signin',
-    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule),
+    loadChildren: () => import('./pages/signin/signin.module').then(m => m.SigninPageModule),
     canActivate: [SignGuard]
   },
   {
     path: 'signup',
-    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule),
+    loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignupPageModule),
     canActivate: [SignGuard]
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule),
+    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
     canActivate: [AuthenticationGuard]
   },
 ];

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {AuthenticationService} from '../services/authentication.service';
+import {AuthenticationService} from '../../services/authentication.service';
 import firebase from 'firebase';
-import {Profile} from '../models/profile.model';
-import {ComponentService} from '../services/component.service';
+import {Profile} from '../../models/profile.model';
+import {ComponentService} from '../../services/component.service';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-signup',

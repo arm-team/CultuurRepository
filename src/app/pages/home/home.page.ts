@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {DestinationService} from '../services/destination.service';
-import {Country, Region, Spot} from '../models/destination.model';
+import {DestinationService} from '../../services/destination.service';
+import {Country, Region, Spot} from '../../models/destination.model';
 import {map} from 'rxjs/operators';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ProfileService} from '../services/profile.service';
-import {Profile} from '../models/profile.model';
-import {AuthenticationService} from '../services/authentication.service';
+import {ProfileService} from '../../services/profile.service';
+import {Profile} from '../../models/profile.model';
+import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 
 @Component({
