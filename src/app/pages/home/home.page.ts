@@ -22,7 +22,7 @@ export class HomePage {
   ) {}
   // tslint:disable-next-line:use-lifecycle-interface
   async ngOnInit(){
-    await this.destinationServ.getCountry().snapshotChanges()
+    await this.destinationServ.getCountries().snapshotChanges()
       .pipe(
           map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
       ).subscribe(data => {
@@ -30,21 +30,21 @@ export class HomePage {
           console.log(data);
       });
 
-    await this.destinationServ.getRegion().snapshotChanges()
+    await this.destinationServ.getRegions().snapshotChanges()
       .pipe(
           map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
       ).subscribe(data => {
           this.regions = data;
           console.log(data);
       });
-    await this.destinationServ.getSpot().snapshotChanges()
+    await this.destinationServ.getSpots().snapshotChanges()
         .pipe(
             map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
         ).subscribe(data => {
             this.spots = data;
             console.log(data);
         });
-    await this.postServ.getPost().snapshotChanges()
+    await this.postServ.getPosts().snapshotChanges()
         .pipe(
             map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
         ).subscribe(data => {

@@ -3,6 +3,7 @@ import {ProfileService} from '../../services/profile.service';
 import {Profile} from '../../models/profile.model';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
+import firebase from 'firebase';
 
 @Component({
   selector: 'app-profile',
@@ -11,17 +12,20 @@ import {Router} from '@angular/router';
 })
 export class ProfilePage implements OnInit {
   profile: Profile;
+  currentUser: firebase.User;
   constructor(
       private profileServ: ProfileService,
       private authService: AuthenticationService,
       private router: Router,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const user: firebase.User = await this.authService.getUser();
+    this.currentUser = user;
   }
 
   ionViewWillEnter(){
-    this.profileServ.getProfile().then(res => res.subscribe(r => this.profile = r));
+    // this.profileServ.getProfile().then(res => res.subscribe(r => this.profile = r));
   }
 
   async signOut(){

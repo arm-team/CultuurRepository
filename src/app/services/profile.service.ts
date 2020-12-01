@@ -1,32 +1,23 @@
 import { Injectable } from '@angular/core';
-import {AuthenticationService} from './authentication.service';
-import {Observable} from 'rxjs';
-import firebase from 'firebase';
+import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
 import {Profile} from '../models/profile.model';
-import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  private currentUser: firebase.User;
-  private listRef: AngularFireList<Profile> = null;
-  private dbPath = '/profile/';
-  private profile: Observable<any>;
   constructor(
       private db: AngularFireDatabase,
-      private authService: AuthenticationService
-  ) { this.listRef = db.list(this.dbPath); }
+  ) {}
 
-  async getProfile(key?: string){
-    const user: firebase.User = await this.authService.getUser();
-    this.currentUser = user;
-    if (key === undefined){
-      key = user.uid;
-      console.log('key nya undefined');
+  getProfile(key: string): AngularFireObject<Profile>{
+    return this.db.object(`profile/${key}`);
+  }
+  getProfiles(where?: string): AngularFireList<Profile>{
+    if (where === undefined){
+      return this.db.list(`profile/`);
     }
-    this.profile = await this.db.object(`profile/${key}`).valueChanges();
-    return this.profile;
+    return this.db.list(`profile/`, ref => ref.orderByChild(where[0]).equalTo(where[1]));
   }
 
   // updateName(fullName: string): Promise<void> {

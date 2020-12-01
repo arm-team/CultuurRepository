@@ -1,4 +1,5 @@
 export interface Profile {
+  key: string;
   countryid: string;
   coverurl: string;
   email: string;

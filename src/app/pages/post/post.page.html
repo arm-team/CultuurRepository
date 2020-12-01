@@ -3,8 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
     </ion-buttons>
-    <ion-title class="centered">
-      CULTUUR
+    <ion-title class="centered" *ngIf="spot">
+      {{spot.name}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -22,7 +22,7 @@
       <img src="https://img-9gag-fun.9cache.com/photo/aQMywzK_460s.jpg" alt="">
     </ion-avatar>
     <ion-label>
-      <h2>{{profile?.username}}</h2>
+      <h2>Test</h2>
     </ion-label>
   </ion-item>
   <!--Bagian Image Post-->
