@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import firebase from 'firebase';
-import {Profile} from '../../models/profile.model';
 import {ComponentService} from '../../services/component.service';
 import {Router} from '@angular/router';
 @Component({
@@ -28,7 +27,7 @@ export class SignupPage implements OnInit {
     const iusername = form.value.username.toString();
     const iname = form.value.name.toString();
     const icountry = form.value.country.toString();
-    const profile: Profile = {
+    const profile: any = {
       countryid: icountry,
       coverurl: 'https://i.ibb.co/HXNgjQv/cover.png',
       email: iemail,
