@@ -24,70 +24,76 @@
     bottom: 0;
     width: 100%;
   }
-
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 </style>
 
 <ion-content>
-  <!--Container Atas-->
   <div *ngIf="!profile" style="width: 100%; height: 100%;">
     <ion-spinner name="dots" class="centered"></ion-spinner>
   </div>
-  <div class="upper-container " *ngIf="profile">
-    <ion-grid>
-      <ion-row style="margin-top: 20px">
-        <ion-col size="12" offset="5">
-          <div class="image-container">
-            <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg" alt=""/>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row style="margin-top: 10px" class="ion-margin-horizontal">
-        <ion-col size="6" class="ion-no-padding">
-          <ion-text class="ion-text-right">{{ profile.name }}</ion-text>
-        </ion-col>
-        <ion-col size="6" class="ion-no-padding">
-          <ion-label class="ion-float-right"> 12</ion-label>
-          <ion-icon name="mail" class="ion-float-right"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-margin-horizontal">
-        <ion-col size="6" class="ion-no-padding" >
-          <ion-text>{{profile.email}}</ion-text>
-        </ion-col>
-        <ion-col size="6" class="ion-no-padding">
-          <ion-label class="ion-float-right"> 50</ion-label>
-          <ion-icon name="heart" class="ion-float-right"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-margin-start">
-        <ion-col size="6" class="ion-no-padding">
-          <ion-text>Indonesia</ion-text>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+  <!--Container Atas-->
+  <div *ngIf="profile">
+    <div class="upper-container ">
+      <ion-grid>
+        <ion-row style="margin-top: 20px">
+          <ion-col size="12" offset="5">
+            <div class="image-container">
+              <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg" alt=""/>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row style="margin-top: 10px" class="ion-margin-horizontal">
+          <ion-col size="6" class="ion-no-padding">
+            <ion-text class="ion-text-right">{{ profile.name }}</ion-text>
+          </ion-col>
+          <ion-col size="6" class="ion-no-padding">
+            <ion-label class="ion-float-right"> 12</ion-label>
+            <ion-icon name="mail" class="ion-float-right"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-horizontal">
+          <ion-col size="6" class="ion-no-padding" >
+            <ion-text>{{profile.email}}</ion-text>
+          </ion-col>
+          <ion-col size="6" class="ion-no-padding">
+            <ion-label class="ion-float-right"> 50</ion-label>
+            <ion-icon name="heart" class="ion-float-right"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-start">
+          <ion-col size="6" class="ion-no-padding">
+            <ion-text>Indonesia</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 
 
-  <!--All post + button Add Post-->
-  <ion-item>
-    <ion-label>All Posts</ion-label>
-    <ion-buttons>
-      <ion-button routerLink="add-post">
-        <ion-icon name="add"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-  </ion-item>
-
-  <!--Tampilan Postingan user-->
-  <ion-item-sliding #slidingItem>
-    <ion-item-options side="start">
-      <ion-item-option color="danger" (click)="slidingItem.close()">
-        <ion-icon slot="icon-only" name="create"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-
+    <!--All post + button Add Post-->
     <ion-item>
+      <ion-label>All Posts</ion-label>
+      <ion-buttons>
+        <ion-button routerLink="add-post">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+    </ion-item>
+
+    <!--Tampilan Postingan user-->
+    <ion-item-sliding #slidingItem>
+      <ion-item-options side="start">
+        <ion-item-option color="danger" (click)="slidingItem.close()">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item>
         <ion-grid class="ion-padding">
           <ion-row>
             <ion-col size="4" class="ion-no-padding">
@@ -104,7 +110,7 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-    </ion-item>
+      </ion-item>
 
       <ion-item-options>
         <ion-item-option color="primary" #insert_routerLink_editPost>
@@ -112,7 +118,6 @@
         </ion-item-option>
       </ion-item-options>
 
-  </ion-item-sliding>
-
-
+    </ion-item-sliding>
+  </div>
 </ion-content>

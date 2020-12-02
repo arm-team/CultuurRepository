@@ -19,12 +19,11 @@ export class ProfilePage implements OnInit {
       private router: Router,
   ) { }
 
-  async ngOnInit() {
-    const user: firebase.User = await this.authService.getUser();
-    this.currentUser = user;
+  ngOnInit() {
   }
 
-  ionViewWillEnter(){
+  async ionViewWillEnter(){
+    this.currentUser = await this.authService.getUser();
     this.profileServ.getProfile(this.currentUser.uid).valueChanges()
         .subscribe(data => {
           this.profile = data;
