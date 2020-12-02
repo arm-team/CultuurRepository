@@ -24,17 +24,17 @@
     <ion-spinner name="dots" class="centered"></ion-spinner>
   </div>
   <div *ngIf="posts && profiles">
-    <div *ngFor="let post of posts">
+    <div *ngFor="let post of posts" class="ion-margin-bottom">
       <ion-item lines="none">
         <ion-avatar slot="start">
           <img src="https://img-9gag-fun.9cache.com/photo/aQMywzK_460s.jpg" alt="">
         </ion-avatar>
         <ion-label>
-          <h2>{{findProfile(post.uid).username}}</h2>
+          <ion-text>{{findProfile(post.uid).username}}</ion-text>
         </ion-label>
       </ion-item>
       <!--Bagian Image Post-->
-      <ion-img src="https://cdn-2.tstatic.net/belitung/foto/bank/images/candi-borobudur-jawa-tengah-jateng.jpg">
+      <ion-img src="{{post.imageurl}}">
       </ion-img>
       <!--Bagian Icon Like, Dislike, dan Comment-->
       <ion-item class="ion-no-margin ion-no-padding">
@@ -64,8 +64,8 @@
       <!--Bagian Nama Lokasi-->
       <ion-item lines="full">
         <ion-text>
-          <h2>Candi Borobudur</h2>
-          <p style="color: #9d9fa6; font-size: 11px">Jl. Badrawati, Kw. Candi Borobudur, Borobudur, Kec. Borobudur, Magelang, Jawa Tengah</p>
+          <h2>{{spot.name}}</h2>
+          <p style="color: #9d9fa6; font-size: 11px">{{spot.address}}</p>
         </ion-text>
         <ion-buttons routerLink="/tabs/explore/view">
           <ion-button>
@@ -77,23 +77,12 @@
       <ion-item lines="full">
         <ion-list>
           <ion-text>
-            <p style="font-size: 12px">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            <p style="font-size: 12px">{{post.caption}}</p>
           </ion-text>
           <ion-text>
-            <p style="color: #3a7be0">#Yogyakarta #Indonesia #WisataPopuler</p>
+            <p style="color: #3a7be0">{{post.tag}}</p>
           </ion-text>
         </ion-list>
-      </ion-item>
-      <!--Comment-->
-      <ion-item lines="full">
-        <ion-avatar slot="start">
-          <img src="https://avatarfiles.alphacoders.com/164/164623.png" alt="">
-        </ion-avatar>
-        <ion-input type="text"
-                   ngModel
-                   name="title"
-                   placeholder="Drop Comment . . ."
-                   #commentCtrl="ngModel"></ion-input>
       </ion-item>
     </div>
   </div>
