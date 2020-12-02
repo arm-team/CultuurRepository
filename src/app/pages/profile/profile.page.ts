@@ -25,7 +25,11 @@ export class ProfilePage implements OnInit {
   }
 
   ionViewWillEnter(){
-    // this.profileServ.getProfile().then(res => res.subscribe(r => this.profile = r));
+    this.profileServ.getProfile(this.currentUser.uid).valueChanges()
+        .subscribe(data => {
+          this.profile = data;
+          console.log(data);
+        });
   }
 
   async signOut(){
