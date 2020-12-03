@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Profile} from '../../models/profile.model';
 import {ProfileService} from '../../services/profile.service';
 import {PostService} from '../../services/post.service';
-import {map} from 'rxjs/operators';
+import {count, map} from 'rxjs/operators';
 import {Post} from '../../models/post.model';
 import {ActivatedRoute} from '@angular/router';
 import {Spot} from '../../models/destination.model';
@@ -54,9 +54,18 @@ export class PostPage implements OnInit {
     });
   }
 
+  openMap(url: string){
+    window.open(url, '_system');
+  }
+
   findProfile(uid: string){
     return this.profiles.find(profile => {
         return profile.key === uid;
     });
   }
+
+  countItem(item: any[]): number{
+    return Object.keys(item).length;
+  }
 }
+
