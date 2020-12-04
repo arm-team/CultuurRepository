@@ -1,14 +1,19 @@
-.card{
-  border-radius: 15px;
-  position:relative;
-  overflow:hidden;
-  padding-bottom:100%;
-  background-color: black;
+.center-cropped {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 200px;
+  width: 100%;
 }
 
-.card-image{
-  position:absolute;
-  object-fit: cover;
-  width: 100%;
-  height: 300px;
+.one-line {
+  max-lines: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.search-result {
+  border-radius: 0 0 15px 15px
 }

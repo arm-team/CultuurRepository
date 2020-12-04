@@ -13,23 +13,27 @@ export class ExplorePage implements OnInit {
   spots: Spot[];
   selectedRegion: Region;
   srcMaps: string;
+  isLoading: boolean;
   constructor(
       private destinationServ: DestinationService,
   ) { }
 
   ngOnInit() {
+    this.isLoading = false;
   }
 
   searchByKeyword(event: any){
+    this.isLoading = true;
     this.destinationServ.searchRegion(event.target.value.toLowerCase()).snapshotChanges()
         .pipe(
             map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
         ).subscribe(data => {
       this.regions = data;
       console.log(data);
+      this.isLoading = false;
+      const element = document.querySelector('ion-list');
+      element.style.display = 'block';
     });
-    const element = document.querySelector('ion-list');
-    element.style.display = element.style.display === 'none' ? 'block' : 'none';
   }
 
   selectRegion(regionId: string){

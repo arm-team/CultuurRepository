@@ -9,7 +9,7 @@ const routes: Routes = [
     component: ExplorePage
   },
   {
-    path: 'view',
+    path: 'view/:spotId',
     loadChildren: () => import('./view/view.module').then(m => m.ViewPageModule)
   }
 ];

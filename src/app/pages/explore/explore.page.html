@@ -13,12 +13,21 @@
 </style>
 <ion-content>
   <div class="header-container">
-    <ion-searchbar class="ion-no-padding ion-padding-bottom" placeholder="Search culture destination" (search)="searchByKeyword($event)"></ion-searchbar>
-    <div *ngIf="!regions"></div>
-    <ion-list *ngIf="regions">
-      <ion-item *ngFor="let region of regions" (click)="selectRegion(region.key)">
-        {{ucwords(region.name)}}
-      </ion-item>
+    <ion-searchbar class="ion-no-padding" placeholder="Search culture destination" (search)="searchByKeyword($event)"></ion-searchbar>
+    <div *ngIf="!regions && isLoading" class="ion-text-center">
+      <ion-spinner name="dots"></ion-spinner>
+    </div>
+    <ion-list *ngIf="regions" class="search-result">
+      <div *ngIf="regions.length === 0">
+        <ion-item>
+          No results found
+        </ion-item>
+      </div>
+      <div *ngIf="regions.length !== 0">
+        <ion-item *ngFor="let region of regions" (click)="selectRegion(region.key)">
+          {{ucwords(region.name)}}
+        </ion-item>
+      </div>
     </ion-list>
   </div>
   <div *ngIf="selectedRegion">
@@ -36,11 +45,11 @@
       </div>
       <div *ngIf="spots">
         <ion-row>
-          <ion-col size="6" *ngFor="let spot of spots" routerLink="/tabs/explore/view">
+          <ion-col size="6" *ngFor="let spot of spots" routerLink="view/{{spot.key}}">
             <ion-card class="ion-no-padding ion-no-margin card" style="border-radius: 15px;">
-              <ion-img class="card-image" src="{{spot.imageurl}}" alt=""></ion-img>
+              <ion-img class="center-cropped" src="{{spot.imageurl}}" alt=""></ion-img>
               <ion-card-content style="width: 100%;">
-                <h6 class="ion-no-margin"><b>{{spot.name}}</b></h6>
+                <h6 class="ion-no-margin one-line"><b>{{spot.name}}</b></h6>
                 <ion-text style="font-size: 10px;">{{ucwords(selectedRegion.name)}}</ion-text>
                 <p>402 KM</p>
               </ion-card-content>
