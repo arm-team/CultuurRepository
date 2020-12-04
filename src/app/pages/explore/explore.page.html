@@ -1,6 +1,6 @@
 <style>
   .header-container{
-    padding: 32px 32px 16px 32px;
+    padding: 16px 32px 16px 32px;
   }
   .header-container ion-text{
     font-size: 11px;
@@ -13,37 +13,41 @@
 </style>
 <ion-content>
   <div class="header-container">
-    <ion-searchbar class="ion-no-padding ion-padding-bottom" placeholder="Search culture destination"></ion-searchbar>
-    <h4 class="ion-no-margin">Explore</h4>
-    <ion-text>Yogyakarta, Kota Yogyakarta, Daerah</ion-text>
+    <ion-searchbar class="ion-no-padding ion-padding-bottom" placeholder="Search culture destination" (search)="searchByKeyword($event)"></ion-searchbar>
+    <div *ngIf="!regions"></div>
+    <ion-list *ngIf="regions">
+      <ion-item *ngFor="let region of regions" (click)="selectRegion(region.key)">
+        {{ucwords(region.name)}}
+      </ion-item>
+    </ion-list>
   </div>
-  <div class="maps-container">
-    <img style="width: 100%; height: auto" src="{{srcMaps}}" alt=""/>
+  <div *ngIf="selectedRegion">
+    <div class="header-container">
+      <h4 class="ion-no-margin">Explore</h4>
+      <ion-text>{{ucwords(selectedRegion.name)}}</ion-text>
+    </div>
+    <div class="maps-container">
+      <img style="width: 100%; height: auto" src="{{srcMaps}}" alt=""/>
+    </div>
+    <div class="view-container">
+      <h4>Favorite Culture Destination</h4>
+      <div *ngIf="!spots" style="width: 100%; height: 100%;">
+        <ion-spinner name="dots" class="centered"></ion-spinner>
+      </div>
+      <div *ngIf="spots">
+        <ion-row>
+          <ion-col size="6" *ngFor="let spot of spots" routerLink="/tabs/explore/view">
+            <ion-card class="ion-no-padding ion-no-margin card" style="border-radius: 15px;">
+              <ion-img class="card-image" src="{{spot.imageurl}}" alt=""></ion-img>
+              <ion-card-content style="width: 100%;">
+                <h6 class="ion-no-margin"><b>{{spot.name}}</b></h6>
+                <ion-text style="font-size: 10px;">{{ucwords(selectedRegion.name)}}</ion-text>
+                <p>402 KM</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
   </div>
-  <div class="view-container">
-    <h4>Favorite Culture Destination</h4>
-    <ion-row>
-      <ion-col size="6" routerLink="/tabs/explore/view">
-        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
-          <ion-img style="width: 100%; height: auto;" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg" alt=""></ion-img>
-          <ion-card-content style="width: 100%;">
-            <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
-            <ion-text style="font-size: 10px;">Daerah Istimewa Yogyakarta</ion-text>
-            <p>402 KM</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6" routerLink="/tabs/explore/view">
-        <ion-card class="ion-no-padding ion-no-margin" style="border-radius: 15px;">
-          <ion-img style="width: 100%; height: auto" src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg"></ion-img>
-          <ion-card-content style="width: 100%;">
-            <h6 class="ion-no-margin"><b>Candi Borobudur</b></h6>
-            <ion-text style="font-size: 10px;">Daerah Istimewa Yogyakarta</ion-text>
-            <p>402 KM</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </div>
-
 </ion-content>

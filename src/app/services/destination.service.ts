@@ -39,4 +39,10 @@ export class DestinationService {
     }
     return this.db.list(`destination/spot/`, ref => ref.orderByChild(where[0]).equalTo(where[1]));
   }
+
+  searchRegion(queryText: string): AngularFireList<Region>{
+    return this.db.list('destination/region/', ref => ref.orderByChild('name')
+        .startAt(queryText)
+        .endAt(queryText + '\uf8ff'));
+  }
 }

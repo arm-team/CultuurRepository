@@ -8,6 +8,8 @@ export interface Region{
   countryid: string;
   name: string;
   mapurl: string;
+  lat: string;
+  long: string;
 }
 
 export interface Spot{
