@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Comments</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!post && !profiles" style="width: 100%; height: 100%;">
+    <ion-spinner name="dots" class="centered"></ion-spinner>
+  </div>
+  <div *ngIf="post && profiles">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2">
+          <img src="{{findProfile(post.uid).imageurl}}" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-text><b>{{findProfile(post.uid).username}}</b> {{post.caption}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let comment of post.comment | keyvalue">
+        <ion-col size="2">
+          <img src="{{findProfile(comment.value.uid).imageurl}}" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-text><b>{{findProfile(comment.value.uid).username}}</b> {{comment.value.content}}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="post && profiles">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2">
+          <img src="{{findProfile(post.uid).imageurl}}" alt="">
+        </ion-col>
+        <ion-col size="8">
+          <ion-input type="text" placeholder="Comment as {{findProfile(post.uid).username}}..."></ion-input>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button type="submit" color="transparent" expand="block" [disabled]="!form.valid">Post</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

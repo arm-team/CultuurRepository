@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () => import('../../edit-post/edit-post.module').then(m => m.EditPostPageModule),
     canActivate: [AuthenticationGuard]
   },
+  {
+    path: 'comment/:postId',
+    loadChildren: () => import('./comment/comment.module').then( m => m.CommentPageModule)
+  },
+
 ];
 
 @NgModule({

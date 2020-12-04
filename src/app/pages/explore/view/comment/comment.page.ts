@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {PostService} from '../../../services/post.service';
-import {Post} from '../../../models/post.model';
+import {Post} from '../../../../models/post.model';
+import {Profile} from '../../../../models/profile.model';
 import {ActivatedRoute} from '@angular/router';
-import {ProfileService} from '../../../services/profile.service';
+import {PostService} from '../../../../services/post.service';
+import {ProfileService} from '../../../../services/profile.service';
 import {map} from 'rxjs/operators';
-import {Profile} from '../../../models/profile.model';
 
 @Component({
   selector: 'app-comment',
@@ -46,5 +46,4 @@ export class CommentPage implements OnInit {
       return profile.key === uid;
     });
   }
-
 }
