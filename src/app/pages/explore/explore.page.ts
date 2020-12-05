@@ -32,7 +32,9 @@ export class ExplorePage implements OnInit {
       console.log(data);
       this.isLoading = false;
       const element = document.querySelector('ion-list');
-      element.style.display = 'block';
+      if (element){
+        element.style.display = 'block';
+      }
     });
   }
 
