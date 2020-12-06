@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Profile} from '../../models/profile.model';
 import {ProfileService} from '../../services/profile.service';
 import {PostService} from '../../services/post.service';
-import {count, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Post} from '../../models/post.model';
 import {ActivatedRoute} from '@angular/router';
 import {Spot} from '../../models/destination.model';
@@ -65,7 +65,11 @@ export class PostPage implements OnInit {
   }
 
   countItem(item: any[]): number{
-    return Object.keys(item).length;
+    if (item){
+      return Object.keys(item).length;
+    }else{
+      return 0;
+    }
   }
 }
 
