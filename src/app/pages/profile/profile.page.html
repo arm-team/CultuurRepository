@@ -13,12 +13,7 @@
 </ion-header>
 
 <style>
-  .upper-container{
-    height: 200px;
-    background-image: url("https://akcdn.detik.net.id/community/media/visual/2020/03/20/b86bb4c8-f0b2-4771-83f3-57b723d5ccd4_169.jpeg?w=700&q=90");
-    background-size: cover;
-      background-position: 50%;
-  }
+
   .bottomed{
     position: absolute;
     bottom: 0;
@@ -30,6 +25,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
 </style>
 
 <ion-content>
@@ -38,7 +34,7 @@
   </div>
   <!--Container Atas-->
   <div *ngIf="profile">
-    <div class="upper-container ">
+    <!--<div class="upper-container ">
       <ion-grid>
         <ion-row style="margin-top: 20px">
           <ion-col size="12" offset="5">
@@ -71,7 +67,20 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-    </div>
+    </div>-->
+
+
+      <!--Header + avatar-->
+      <div class="header">
+          <div class="avatar">
+              <img src="{{profile.imageurl}}"/>
+          </div>
+      </div>
+
+      <div class="profile-info ion-text-center">
+        <h3 class="name">{{profile.name}}</h3>
+        <h3 class="country">{{profile.email}}</h3>
+      </div>
 
 
     <!--All post + button Add Post-->

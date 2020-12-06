@@ -6,9 +6,13 @@ import {Profile} from '../models/profile.model';
   providedIn: 'root'
 })
 export class ProfileService {
+  private dbPath = '/profile';
+  profileRef: AngularFireList<Profile> = null;
   constructor(
       private db: AngularFireDatabase,
-  ) {}
+  ) {
+    this.profileRef = db.list(this.dbPath);
+  }
 
   getProfile(key: string): AngularFireObject<Profile>{
     return this.db.object(`profile/${key}`);
@@ -18,6 +22,10 @@ export class ProfileService {
       return this.db.list(`profile/`);
     }
     return this.db.list(`profile/`, ref => ref.orderByChild(where[0]).equalTo(where[1]));
+  }
+
+  update(key: string, value: any): Promise<void> {
+    return this.profileRef.update(key, value);
   }
 
   // updateName(fullName: string): Promise<void> {
