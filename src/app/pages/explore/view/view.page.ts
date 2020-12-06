@@ -66,7 +66,11 @@ export class ViewPage implements OnInit {
   }
 
   countItem(item: any[]): number{
-    return Object.keys(item).length;
+    if (item){
+      return Object.keys(item).length;
+    }else{
+      return 0;
+    }
   }
 
 }

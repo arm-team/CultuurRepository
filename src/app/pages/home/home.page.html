@@ -39,7 +39,7 @@
               <ion-img class="card-image black-transparent" src="{{findPost(spot.key).imageurl}}"></ion-img>
               <div class="centered ion-text-center" style="width: 100%; color: white;">
                 <h6 class="ion-no-margin"><b>{{spot.name}}</b></h6>
-                <ion-text style="font-size: 10px; font-style: italic;">{{findRegion(spot.regionid).name}}</ion-text>
+                <ion-text style="font-size: 10px; font-style: italic;">{{ucwords(findRegion(spot.regionid).name)}}</ion-text>
               </div>
             </ion-card>
           </ion-col>

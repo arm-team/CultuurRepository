@@ -70,11 +70,10 @@ export class ExplorePage implements OnInit {
   }
 
   ucwords(value: string): string {
-    const str = value.toLowerCase();
-    return str.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
-        s => {
-          return s.toUpperCase();
-        });
+    const wordArray = value.split(' ').filter(char => char !== '');
+    return wordArray.map(word => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
   }
 
 }

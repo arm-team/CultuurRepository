@@ -75,4 +75,11 @@ export class HomePage {
         return post.spotid === spotid;
     });
   }
+
+  ucwords(value: string): string {
+    const wordArray = value.split(' ').filter(char => char !== '');
+    return wordArray.map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+  }
 }

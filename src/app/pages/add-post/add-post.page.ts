@@ -52,7 +52,9 @@ export class AddPostPage implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
+    // Show loading post
+    await this.compServ.showLoading('Creating post');
     this.uploadImage(this.image.dataUrl);
     this.uploadState.subscribe(state => {
       if (state === 'success'){
@@ -69,6 +71,7 @@ export class AddPostPage implements OnInit {
             };
             this.postServ.createPost(post).then(() => {
               form.reset();
+              this.compServ.hideLoading();
               this.navCtrl.pop();
               this.compServ.showToast('Post Created');
             });
@@ -102,7 +105,7 @@ export class AddPostPage implements OnInit {
     // create a random id
     const randomId = Math.random().toString(36).substring(2);
     // create a reference to the storage bucket location
-    this.ref = this.afStorage.ref('/images/' + randomId);
+    this.ref = this.afStorage.ref('/post/images/' + randomId);
     // the put method creates an AngularFireUploadTask
     // and kicks off the upload
     this.task = this.ref.putString(file, 'data_url');
