@@ -6,7 +6,10 @@
 </ion-toolbar>
 
 <ion-content>
-  <ion-grid>
+  <div *ngIf="!spots" style="width: 100%; height: 100%;">
+    <ion-spinner name="dots" class="centered"></ion-spinner>
+  </div>
+  <ion-grid *ngIf="spots">
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2">
         <ion-card>
@@ -23,32 +26,13 @@
         <!--FORM-->
         <form style="padding: 15px 60px 15px 60px;" #form="ngForm" (ngSubmit)="onSubmit(form)">
           <ion-item>
-            <ion-label position="floating" color="medium">Title</ion-label>
-            <ion-input type="text"
-                       ngModel
-                       name="title"
-                       required
-                       #titleCtrl="ngModel"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!titleCtrl.valid && titleCtrl.touched">
-            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Title should not be empty.</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating" color="medium">Tags</ion-label>
-            <ion-input style="color: #4854e0" type="text"
-                       ngModel
-                       name="tag"
-            ></ion-input>
-          </ion-item>
-          <ion-item>
             <ion-label position="floating" color="medium">Location</ion-label>
             <ion-select type="text"
                        ngModel interface="popover"
                        name="location"
                        required
                        #locationCtrl="ngModel">
-              <ion-select-option value="id">Kabupaten Gunung Kidul</ion-select-option>
+              <ion-select-option *ngFor="let spot of spots" [value]="spot.key">{{spot.name}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item *ngIf="!locationCtrl.valid && locationCtrl.touched">
@@ -62,6 +46,13 @@
                     ngModel
                     name="caption"
             ></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" color="medium">Tags</ion-label>
+            <ion-input style="color: #4854e0" type="text"
+                       ngModel
+                       name="tag"
+            ></ion-input>
           </ion-item>
           <!--Button Submit-->
           <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block" [disabled]="!form.valid">Add Post</ion-button>

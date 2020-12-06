@@ -6,6 +6,7 @@ export interface Post{
   spotid: string;
   tag: string;
   uid: string;
+  date: string;
   comment: Comment[];
   dislike: Dislike[];
   like: Like[];
