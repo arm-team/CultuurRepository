@@ -7,6 +7,8 @@ import {Post} from '../../models/post.model';
 import {ActivatedRoute} from '@angular/router';
 import {Spot} from '../../models/destination.model';
 import {DestinationService} from '../../services/destination.service';
+import {AuthenticationService} from '../../services/authentication.service';
+import firebase from 'firebase';
 
 @Component({
   selector: 'app-post',
@@ -14,6 +16,7 @@ import {DestinationService} from '../../services/destination.service';
   styleUrls: ['./post.page.scss'],
 })
 export class PostPage implements OnInit {
+  currentUser: firebase.User;
   spotId: string;
   profiles: Profile[];
   posts: Post[];
@@ -23,9 +26,11 @@ export class PostPage implements OnInit {
       private profileServ: ProfileService,
       private postServ: PostService,
       private destinationServ: DestinationService,
+      private authServ: AuthenticationService,
   ) { }
 
   async ngOnInit() {
+    this.currentUser = await this.authServ.getUser();
     await this.activatedRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('spotId')) { return; }
       const spotId = paramMap.get('spotId');
@@ -88,6 +93,40 @@ export class PostPage implements OnInit {
       return false;
     } else{
       return result;
+    }
+  }
+
+  likePost(postKey: string, postUid: string, currUid: string, like: any[], dislike: any[]){
+    this.postServ.likePost(postKey, postUid, this.isLikedOrDisliked(dislike, currUid), this.getKey(like, postUid));
+  }
+  unlikePost(postKey: string, like: any[], postUid: string){
+    this.postServ.unlikePost(postKey, this.getKey(like, postUid));
+  }
+
+  dislikePost(postKey: string, postUid: string, currUid: string, like: any[], dislike: any[]){
+    this.postServ.dislikePost(postKey, postUid, this.isLikedOrDisliked(like, currUid), this.getKey(dislike, postUid));
+  }
+  undislikePost(postKey: string, dislike: any[], postUid: string){
+    this.postServ.undislikePost(postKey, this.getKey(dislike, postUid));
+  }
+
+  isLikedOrDisliked(item: any[], uid: string) {
+    if (item) {
+      if (Object.values(item).find(i => i.uid === uid)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getKey(item: any[], uid: string){
+    if (item) {
+      // tslint:disable-next-line:prefer-const
+      for (let [key, value] of Object.entries(item)) {
+        if (Object.values(value)[0] === uid){
+          return key;
+        }
+      }
     }
   }
 }

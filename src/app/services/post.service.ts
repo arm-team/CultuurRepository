@@ -24,4 +24,26 @@ export class PostService {
   createPost(post: Post){
     return this.db.list('post/').push(post);
   }
+
+  likePost(key: string, userId: string, disliked: boolean, itemKey: string){
+    if (disliked){
+      this.undislikePost(key, itemKey);
+    }
+    const uid = {uid: userId};
+    this.db.list(`post/${key}/like/`).push(uid);
+  }
+  unlikePost(key: string,  itemKey: string){
+    this.db.list(`post/${key}/like/`).remove(itemKey);
+  }
+
+  dislikePost(key: string, userId: string, liked: boolean, itemKey: string){
+    if (liked){
+      this.unlikePost(key, itemKey);
+    }
+    const uid = {uid: userId};
+    this.db.list(`post/${key}/dislike/`).push(uid);
+  }
+  undislikePost(key: string,  itemKey: string){
+    this.db.list(`post/${key}/dislike/`).remove(itemKey);
+  }
 }

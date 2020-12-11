@@ -31,14 +31,20 @@
       <!--Bagian Icon Like, Dislike, dan Comment-->
       <ion-item class="ion-no-margin ion-no-padding">
         <ion-buttons>
-          <ion-button>
+          <ion-button *ngIf="!isLikedOrDisliked(post.like, currentUser.uid)" (click)="likePost(post.key, post.uid, currentUser.uid, post.like, post.dislike)">
             <ion-icon name="thumbs-up-outline" color="dark" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button *ngIf="isLikedOrDisliked(post.like, currentUser.uid)" (click)="unlikePost(post.key, post.like, post.uid)">
+            <ion-icon name="thumbs-up" color="dark" slot="icon-only"></ion-icon>
           </ion-button>
           <ion-label>{{countItem(post.like)}}</ion-label>
         </ion-buttons>
         <ion-buttons>
-          <ion-button>
+          <ion-button *ngIf="!isLikedOrDisliked(post.dislike, currentUser.uid)" (click)="dislikePost(post.key, post.uid, currentUser.uid, post.like, post.dislike)">
             <ion-icon name="thumbs-down-outline" color="dark" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button *ngIf="isLikedOrDisliked(post.dislike, currentUser.uid)" (click)="undislikePost(post.key, post.dislike, post.uid)">
+            <ion-icon name="thumbs-down" color="dark" slot="icon-only"></ion-icon>
           </ion-button>
           <ion-label>{{countItem(post.dislike)}}</ion-label>
         </ion-buttons>
@@ -68,10 +74,10 @@
       <!--Caption-->
       <ion-item lines="full">
         <ion-list>
-          <p>
+          <p *ngIf="post.caption">
             {{post.caption}}
           </p>
-          <p style="color: #3a7be0">
+          <p style="color: #3a7be0" *ngIf="post.tag">
             {{makeHashtag(post.tag)}}
           </p>
         </ion-list>
