@@ -12,30 +12,50 @@
     <ion-spinner name="dots" class="centered"></ion-spinner>
   </div>
   <div *ngIf="post && profiles">
+    <ion-list>
     <ion-grid>
+
+      <!--Post Caption-->
       <ion-row>
         <ion-col size="2">
           <img src="{{findProfile(post.uid).imageurl}}" alt="">
         </ion-col>
         <ion-col size="10">
-          <ion-text><b>{{findProfile(post.uid).username}}</b> {{post.caption}}</ion-text>
+          <ion-text>
+            <p><b>{{findProfile(post.uid).username}}</b> {{post.caption}}</p>
+          </ion-text>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let comment of post.comment | keyvalue">
-        <ion-col size="2">
-          <img src="{{findProfile(comment.value.uid).imageurl}}" alt="">
-        </ion-col>
-        <ion-col size="10">
-          <ion-text><b>{{findProfile(comment.value.uid).username}}</b> {{comment.value.content}}</ion-text>
-        </ion-col>
-        <ion-col size="12">
-          <ion-text>{{comment.value.date | timeAgo}}</ion-text>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+
+     <!--Comment-->
+        <ion-row *ngFor="let comment of post.comment | keyvalue">
+          <ion-item class="ion-padding-start">
+            <ion-col size="3">
+              <img src="{{findProfile(comment.value.uid).imageurl}}" alt="">
+            </ion-col>
+            <ion-col size="10">
+              <ion-text>
+                <p><b>{{findProfile(comment.value.uid).username}}</b> {{comment.value.content}}</p>
+              </ion-text>
+              <ion-text style="font-size: 12px; color: #7d7d7d">
+                <p>{{comment.value.date | timeAgo}}</p>
+              </ion-text>
+            </ion-col>
+            <ion-item slot="end" class="ion-margin-start" lines="none">
+              <ion-buttons>
+                <ion-button slot="end">
+                  <ion-icon name="close-circle-sharp" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-item>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
   </div>
 </ion-content>
 
+<!--Input Comment-->
 <ion-footer *ngIf="post && profiles">
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <ion-grid>
@@ -46,14 +66,14 @@
           </ion-avatar>
         </ion-col>
         <ion-col size="8">
-          <ion-input
+          <ion-textarea
                   type="text"
                   placeholder="Comment as {{findProfile(post.uid).username}}..."
                   name="comment"
                   ngModel
                   required
                   #commentCtrl="ngModel"
-          ></ion-input>
+          ></ion-textarea>
         </ion-col>
         <ion-col size="2">
           <ion-buttons>
