@@ -14,6 +14,7 @@ export interface Post{
 
 export interface Comment{
     content: string;
+    date: string;
     uid: string;
 }
 

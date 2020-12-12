@@ -28,6 +28,9 @@
         <ion-col size="10">
           <ion-text><b>{{findProfile(comment.value.uid).username}}</b> {{comment.value.content}}</ion-text>
         </ion-col>
+        <ion-col size="12">
+          <ion-text>{{comment.value.date | timeAgo}}</ion-text>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </div>

@@ -50,6 +50,7 @@ export class PostService {
   commentPost(key: string, userId: string, msg: string){
     const comment = {
       content: msg,
+      date: Date.now(),
       uid: userId
     };
     this.db.list(`post/${key}/comment/`).push(comment);

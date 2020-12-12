@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { PostPageRoutingModule } from './post-routing.module';
 
 import { PostPage } from './post.page';
+// Time Ago Library
+// pastikan sebelumnya telah menjalankan npm install time-ago-pipe --save
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +18,6 @@ import { PostPage } from './post.page';
     IonicModule,
     PostPageRoutingModule
   ],
-  declarations: [PostPage]
+  declarations: [PostPage, TimeAgoPipe]
 })
 export class PostPageModule {}
