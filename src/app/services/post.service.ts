@@ -46,4 +46,12 @@ export class PostService {
   undislikePost(key: string,  itemKey: string){
     this.db.list(`post/${key}/dislike/`).remove(itemKey);
   }
+
+  commentPost(key: string, userId: string, msg: string){
+    const comment = {
+      content: msg,
+      uid: userId
+    };
+    this.db.list(`post/${key}/comment/`).push(comment);
+  }
 }
