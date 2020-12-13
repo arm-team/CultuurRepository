@@ -18,8 +18,11 @@ import firebase from 'firebase';
 export class PostPage implements OnInit {
   currentUser: firebase.User;
   spotId: string;
+  postId: string;
   profiles: Profile[];
+  profile: Profile;
   posts: Post[];
+  post: Post;
   spot: Spot;
   constructor(
       private activatedRoute: ActivatedRoute,
@@ -32,30 +35,49 @@ export class PostPage implements OnInit {
   async ngOnInit() {
     this.currentUser = await this.authServ.getUser();
     await this.activatedRoute.paramMap.subscribe(paramMap => {
-      if (!paramMap.has('spotId')) { return; }
-      const spotId = paramMap.get('spotId');
-      this.spotId = spotId;
-      this.destinationServ.getSpot(spotId).valueChanges()
-          .subscribe(data => {
-            this.spot = data;
-            console.log(data);
-          });
+      if (paramMap.has('spotId')) {
+        const spotId = paramMap.get('spotId');
+        this.spotId = spotId;
+        this.destinationServ.getSpot(spotId).valueChanges()
+            .subscribe(data => {
+              this.spot = data;
+              console.log(data);
+            });
 
-      this.postServ.getPosts(['spotid', spotId]).snapshotChanges()
-          .pipe(
-              map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
-          ).subscribe(data => {
-            this.posts = data;
-            console.log(data);
-          });
+        this.postServ.getPosts(['spotid', spotId]).snapshotChanges()
+            .pipe(
+                map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
+            ).subscribe(data => {
+          this.posts = data;
+          console.log(data);
+        });
 
-      this.profileServ.getProfiles().snapshotChanges()
-          .pipe(
-              map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
-          ).subscribe(data => {
-        this.profiles = data;
-        console.log(data);
-      });
+        this.profileServ.getProfiles().snapshotChanges()
+            .pipe(
+                map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
+            ).subscribe(data => {
+          this.profiles = data;
+          console.log(data);
+        });
+      }else if (paramMap.has('postId')) {
+        const postId = paramMap.get('postId');
+        this.postId = postId;
+        this.postServ.getPost(postId).valueChanges()
+            .subscribe(data => {
+              this.post = data;
+              console.log(data);
+              this.destinationServ.getSpot(data.spotid).valueChanges()
+                  .subscribe(d => {
+                    this.spot = d;
+                    console.log(d);
+                  });
+            });
+        this.profileServ.getProfile(this.currentUser.uid).valueChanges()
+            .subscribe(data => {
+              this.profile = data;
+              console.log(data);
+            });
+      }
     });
   }
 

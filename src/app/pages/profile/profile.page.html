@@ -73,7 +73,7 @@
       <!--Header + avatar-->
       <div class="header">
           <div class="avatar">
-              <img src="{{profile.imageurl}}"/>
+              <img src="{{profile.imageurl}}" alt=""/>
           </div>
       </div>
 
@@ -94,39 +94,45 @@
 
     </ion-item>
 
+    <div *ngIf="!posts" style="width: 100%; height: 100%;">
+      <ion-spinner name="dots" class="centered"></ion-spinner>
+    </div>
     <!--Tampilan Postingan user-->
-    <ion-item-sliding #slidingItem>
-      <ion-item-options side="start">
-        <ion-item-option color="danger" (click)="slidingItem.close()">
-          <ion-icon slot="icon-only" name="create"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
+    <div *ngIf="posts">
+      <ion-item-sliding #slidingItem *ngFor="let post of posts">
+        <ion-item-options side="start">
+          <ion-item-option color="primary" routerLink="edit-post/{{post.key}}">
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
 
-      <ion-item>
-        <ion-grid class="ion-padding">
-          <ion-row>
-            <ion-col size="4" class="ion-no-padding">
-              <ion-img src="https://phinemo.com/wp-content/uploads/2017/08/borobudur11.jpg" alt=""></ion-img>
-            </ion-col>
-            <ion-col size="8" style="padding: 0 16px">
-              <div>
-                <ion-text style="padding: 2px;text-align: justify;margin-top: 5px;overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; line-height: 16px; max-height: 200px; -webkit-box-orient: vertical">Lorem Ipsum is simply dummy text of the printing and typesetting industry</ion-text>
-              </div>
-              <div class="ion-text-right bottomed">
-                <ion-icon name="heart"></ion-icon> 121
-                <ion-icon name="chatbox-ellipses"></ion-icon> 11
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
+        <ion-item routerLink="post/{{post.key}}">
+          <ion-grid class="ion-padding">
+            <ion-row>
+              <ion-col size="4" class="ion-no-padding">
+                <ion-img src="{{post.imageurl}}" alt=""></ion-img>
+              </ion-col>
+              <ion-col size="8" style="padding: 0 16px">
+                <div>
+                  <ion-text style="padding: 2px;text-align: justify;margin-top: 5px;overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; line-height: 16px; max-height: 200px; -webkit-box-orient: vertical">{{post.caption}}</ion-text>
+                </div>
+                <div class="ion-text-right bottomed">
+                  <ion-icon name="thumbs-up"></ion-icon> {{countItem(post.like)}}
+                  <ion-icon name="thumbs-down"></ion-icon> {{countItem(post.dislike)}}
+                  <ion-icon name="chatbox-ellipses"></ion-icon> {{countItem(post.comment)}}
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
 
-      <ion-item-options>
-        <ion-item-option color="primary" #insert_routerLink_editPost>
-          <ion-icon name="trash" slot="icon-only"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
+        <ion-item-options>
+          <ion-item-option color="danger" #insert_routerLink_editPost>
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
 
-    </ion-item-sliding>
+      </ion-item-sliding>
+    </div>
   </div>
 </ion-content>

@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () => import('./edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
   },
   {
-    path: 'post/:spotId',
+    path: 'post/:postId',
     loadChildren: () => import('../post/post.module').then(m => m.PostPageModule),
     canActivate: [AuthenticationGuard]
   },
@@ -24,7 +24,7 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
   {
-    path: 'edit-post',
+    path: 'edit-post/:postId',
     loadChildren: () => import('../edit-post/edit-post.module').then(m => m.EditPostPageModule),
     canActivate: [AuthenticationGuard]
   },

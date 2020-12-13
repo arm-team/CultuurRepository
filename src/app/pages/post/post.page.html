@@ -3,26 +3,110 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
     </ion-buttons>
-    <ion-title class="centered" *ngIf="spot">
-      {{spot.name}}
-    </ion-title>
-    <div *ngIf="!spot">
-      <ion-spinner name="dots" class="centered"></ion-spinner>
+    <div *ngIf="spotId">
+      <ion-title class="centered" *ngIf="spot">
+        {{spot.name}}
+      </ion-title>
+      <div *ngIf="!spot">
+        <ion-spinner name="dots" class="centered"></ion-spinner>
+      </div>
+    </div>
+    <div *ngIf="postId">
+      <ion-title>
+        Post
+      </ion-title>
     </div>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div *ngIf="!posts && !profiles" style="width: 100%; height: 100%;">
-    <ion-spinner name="dots" class="centered"></ion-spinner>
+  <!-- Jika route selain dari profile -->
+  <div *ngIf="spotId">
+    <div *ngIf="!posts && !profiles" style="width: 100%; height: 100%;">
+      <ion-spinner name="dots" class="centered"></ion-spinner>
+    </div>
+    <div *ngIf="posts && profiles">
+      <div *ngFor="let post of posts" class="ion-margin-bottom">
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <img src="{{findProfile(post.uid).imageurl}}" alt="">
+          </ion-avatar>
+          <ion-label>
+            <ion-text><b>{{findProfile(post.uid).username}}</b></ion-text>
+          </ion-label>
+        </ion-item>
+        <!--Bagian Image Post-->
+        <ion-img src="{{post.imageurl}}">
+        </ion-img>
+        <!--Bagian Icon Like, Dislike, dan Comment-->
+        <ion-item class="ion-no-margin ion-no-padding">
+          <ion-buttons>
+            <ion-button *ngIf="!isLikedOrDisliked(post.like, currentUser.uid)" (click)="likePost(post.key, currentUser.uid, post.dislike)">
+              <ion-icon name="thumbs-up-outline" color="dark" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button *ngIf="isLikedOrDisliked(post.like, currentUser.uid)" (click)="unlikePost(post.key, post.like, currentUser.uid)">
+              <ion-icon name="thumbs-up" color="dark" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-label>{{countItem(post.like)}}</ion-label>
+          </ion-buttons>
+          <ion-buttons>
+            <ion-button *ngIf="!isLikedOrDisliked(post.dislike, currentUser.uid)" (click)="dislikePost(post.key, currentUser.uid, post.like)">
+              <ion-icon name="thumbs-down-outline" color="dark" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button *ngIf="isLikedOrDisliked(post.dislike, currentUser.uid)" (click)="undislikePost(post.key, post.dislike, currentUser.uid)">
+              <ion-icon name="thumbs-down" color="dark" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-label>{{countItem(post.dislike)}}</ion-label>
+          </ion-buttons>
+          <ion-buttons>
+            <ion-button routerLink="comment/{{post.key}}">
+              <ion-icon name="chatbox-ellipses" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-label>{{countItem(post.comment)}}</ion-label>
+          </ion-buttons>
+          <!--Tanggal Upload-->
+          <ion-item slot="end" lines="none">
+            <ion-label *ngIf="post.date" style="font-size: 12px; color: #9d9fa6">{{post.date | timeAgo}}</ion-label>
+          </ion-item>
+        </ion-item>
+
+        <!--Caption-->
+        <ion-item lines="full">
+          <ion-list>
+            <p>
+              <b>{{findProfile(post.uid).username}}</b> {{post.caption}}
+            </p>
+            <p *ngIf="post.tag" style="color: #3a7be0">
+              {{makeHashtag(post.tag)}}
+            </p>
+          </ion-list>
+        </ion-item>
+        <!--Bagian Nama Lokasi-->
+        <ion-item color="light" lines="full">
+          <ion-text>
+            <!--<h3>{{spot.name}}</h3>-->
+            <p style="color: #9d9fa6; font-size: 11px">{{spot.address}}</p>
+          </ion-text>
+          <ion-buttons>
+            <ion-button (click)="openMap(spot.mapurl)">
+              <ion-icon name="map" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </div>
+    </div>
   </div>
-  <div *ngIf="posts && profiles">
-    <div *ngFor="let post of posts" class="ion-margin-bottom">
+  <!-- Jika route dari profile -->
+  <div *ngIf="postId">
+    <div *ngIf="!post && !profile && !spot" style="width: 100%; height: 100%;">
+      <ion-spinner name="dots" class="centered"></ion-spinner>
+    </div>
+    <div *ngIf="post && profile && spot">
       <ion-item lines="none">
         <ion-avatar slot="start">
-          <img src="{{findProfile(post.uid).imageurl}}" alt="">
+          <img src="{{profile.imageurl}}" alt="">
         </ion-avatar>
         <ion-label>
-          <ion-text><b>{{findProfile(post.uid).username}}</b></ion-text>
+          <ion-text><b>{{profile.username}}</b></ion-text>
         </ion-label>
       </ion-item>
       <!--Bagian Image Post-->
@@ -49,7 +133,7 @@
           <ion-label>{{countItem(post.dislike)}}</ion-label>
         </ion-buttons>
         <ion-buttons>
-          <ion-button routerLink="comment/{{post.key}}">
+          <ion-button routerLink="comment/{{postId}}">
             <ion-icon name="chatbox-ellipses" slot="icon-only"></ion-icon>
           </ion-button>
           <ion-label>{{countItem(post.comment)}}</ion-label>
@@ -64,7 +148,7 @@
       <ion-item lines="full">
         <ion-list>
           <p>
-            <b>{{findProfile(post.uid).username}}</b> {{post.caption}}
+            <b>{{profile.username}}</b> {{post.caption}}
           </p>
           <p *ngIf="post.tag" style="color: #3a7be0">
             {{makeHashtag(post.tag)}}
@@ -72,17 +156,17 @@
         </ion-list>
       </ion-item>
       <!--Bagian Nama Lokasi-->
-       <ion-item color="light" lines="full">
-         <ion-text>
-           <!--<h3>{{spot.name}}</h3>-->
-           <p style="color: #9d9fa6; font-size: 11px">{{spot.address}}</p>
-         </ion-text>
-         <ion-buttons>
-           <ion-button (click)="openMap(spot.mapurl)">
-             <ion-icon name="map" slot="icon-only"></ion-icon>
-           </ion-button>
-         </ion-buttons>
-       </ion-item>
+      <ion-item color="light" lines="full">
+        <ion-text>
+          <!--<h3>{{spot.name}}</h3>-->
+          <p style="color: #9d9fa6; font-size: 11px">{{spot.address}}</p>
+        </ion-text>
+        <ion-buttons>
+          <ion-button (click)="openMap(spot.mapurl)">
+            <ion-icon name="map" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
     </div>
   </div>
 </ion-content>
