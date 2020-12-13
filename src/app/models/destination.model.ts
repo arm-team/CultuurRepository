@@ -21,10 +21,3 @@ export interface Spot{
   name: string;
   regionid: string;
 }
-
-export interface Rate{
-  key: string;
-  rating: number;
-  spotid: string;
-  uid: string;
-}
