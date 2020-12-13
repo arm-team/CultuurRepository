@@ -32,7 +32,7 @@ export class PostService {
     const uid = {uid: userId};
     this.db.list(`post/${key}/like/`).push(uid);
   }
-  unlikePost(key: string,  itemKey: string){
+  unlikePost(key: string, itemKey: string){
     this.db.list(`post/${key}/like/`).remove(itemKey);
   }
 
@@ -43,7 +43,7 @@ export class PostService {
     const uid = {uid: userId};
     this.db.list(`post/${key}/dislike/`).push(uid);
   }
-  undislikePost(key: string,  itemKey: string){
+  undislikePost(key: string, itemKey: string){
     this.db.list(`post/${key}/dislike/`).remove(itemKey);
   }
 

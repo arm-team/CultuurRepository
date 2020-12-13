@@ -96,18 +96,18 @@ export class PostPage implements OnInit {
     }
   }
 
-  likePost(postKey: string, postUid: string, currUid: string, like: any[], dislike: any[]){
-    this.postServ.likePost(postKey, currUid, this.isLikedOrDisliked(dislike, currUid), this.getKey(like, postUid));
+  likePost(postKey: string, currUid: string, dislike: any[]){
+    this.postServ.likePost(postKey, currUid, this.isLikedOrDisliked(dislike, currUid), this.getKey(dislike, currUid));
   }
-  unlikePost(postKey: string, like: any[], postUid: string){
-    this.postServ.unlikePost(postKey, this.getKey(like, postUid));
+  unlikePost(postKey: string, like: any[], currUid: string){
+    this.postServ.unlikePost(postKey, this.getKey(like, currUid));
   }
 
-  dislikePost(postKey: string, postUid: string, currUid: string, like: any[], dislike: any[]){
-    this.postServ.dislikePost(postKey, currUid, this.isLikedOrDisliked(like, currUid), this.getKey(dislike, postUid));
+  dislikePost(postKey: string, currUid: string, like: any[]){
+    this.postServ.dislikePost(postKey, currUid, this.isLikedOrDisliked(like, currUid), this.getKey(like, currUid));
   }
-  undislikePost(postKey: string, dislike: any[], postUid: string){
-    this.postServ.undislikePost(postKey, this.getKey(dislike, postUid));
+  undislikePost(postKey: string, dislike: any[], currUid: string){
+    this.postServ.undislikePost(postKey, this.getKey(dislike, currUid));
   }
 
   isLikedOrDisliked(item: any[], uid: string) {

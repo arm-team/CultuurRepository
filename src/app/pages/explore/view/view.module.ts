@@ -8,6 +8,10 @@ import { ViewPageRoutingModule } from './view-routing.module';
 
 import { ViewPage } from './view.page';
 
+// Time Ago Library
+// pastikan sebelumnya telah menjalankan npm install time-ago-pipe --save
+import {TimeAgoPipe} from 'time-ago-pipe';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +19,6 @@ import { ViewPage } from './view.page';
     IonicModule,
     ViewPageRoutingModule
   ],
-  declarations: [ViewPage]
+  declarations: [ViewPage, TimeAgoPipe]
 })
 export class ViewPageModule {}

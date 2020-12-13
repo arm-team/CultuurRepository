@@ -5,6 +5,9 @@ import {ActivatedRoute} from '@angular/router';
 import {PostService} from '../../../../services/post.service';
 import {ProfileService} from '../../../../services/profile.service';
 import {map} from 'rxjs/operators';
+import firebase from 'firebase';
+import {AuthenticationService} from '../../../../services/authentication.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-comment',
@@ -13,15 +16,18 @@ import {map} from 'rxjs/operators';
 })
 export class CommentPage implements OnInit {
   postId: string;
+  currentUser: firebase.User;
   post: Post;
   profiles: Profile[];
   constructor(
       private activatedRoute: ActivatedRoute,
       private postServ: PostService,
       private profileServ: ProfileService,
+      private authServ: AuthenticationService,
   ) { }
 
   async ngOnInit() {
+    this.currentUser = await this.authServ.getUser();
     await this.activatedRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('postId')) { return; }
       const postId = paramMap.get('postId');
@@ -39,6 +45,11 @@ export class CommentPage implements OnInit {
         console.log(data);
       });
     });
+  }
+
+  onSubmit(form: NgForm){
+    this.postServ.commentPost(this.postId, this.currentUser.uid, form.value.comment);
+    form.reset();
   }
 
   findProfile(uid: string){
