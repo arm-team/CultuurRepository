@@ -6,41 +6,20 @@
 </ion-toolbar>
 
 <ion-content>
-  <ion-grid>
+  <div *ngIf="!post && !spots && !currentUser" style="width: 100%; height: 100%;">
+    <ion-spinner name="dots" class="centered"></ion-spinner>
+  </div>
+  <ion-grid *ngIf="post && spots && currentUser">
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2">
-        <ion-card>
-          <ion-card-header>
-            <!--UPLOAD IMAGE FROM DEVICE-->
-            <ion-buttons>
-              <ion-button>
-                <ion-icon name="image" slot="icon-only"></ion-icon>
-              </ion-button>
-              <ion-card-subtitle>Upload Your Image :)</ion-card-subtitle>
-            </ion-buttons>
+        <ion-card style="margin: 15px 60px 15px 60px;">
+          <ion-card-header class="ion-text-center">
+            <!-- image preview -->
+            <img src="{{post.imageurl}}" alt="">
           </ion-card-header>
         </ion-card>
         <!--FORM-->
         <form style="padding: 15px 60px 15px 60px;" #form="ngForm" (ngSubmit)="onSubmit(form)">
-          <ion-item>
-            <ion-label position="floating" color="medium">Title</ion-label>
-            <ion-input type="text"
-                       ngModel
-                       name="title"
-                       required
-                       #titleCtrl="ngModel"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!titleCtrl.valid && titleCtrl.touched">
-            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Title should not be empty.</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating" color="medium">Tags</ion-label>
-            <ion-input style="color: #4854e0" type="text"
-                       ngModel
-                       name="tag"
-            ></ion-input>
-          </ion-item>
           <ion-item>
             <ion-label position="floating" color="medium">Location</ion-label>
             <ion-select type="text"
@@ -48,7 +27,7 @@
                         name="location"
                         required
                         #locationCtrl="ngModel">
-              <ion-select-option value="id">Kabupaten Gunung Kidul</ion-select-option>
+              <ion-select-option *ngFor="let spot of spots" [value]="spot.key">{{spot.name}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item *ngIf="!locationCtrl.valid && locationCtrl.touched">
@@ -59,15 +38,22 @@
             <ion-label position="floating" color="medium">Caption:</ion-label>
             <ion-textarea
                     type="text"
-                    ngModel
+                    [ngModel]="post.caption"
                     name="caption"
             ></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" color="medium">Tags</ion-label>
+            <ion-input style="color: #4854e0" type="text"
+                       [ngModel]="post.tag"
+                       name="tag"
+            ></ion-input>
           </ion-item>
           <!--Button Submit-->
           <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block" [disabled]="!form.valid">Edit Post</ion-button>
         </form>
         <div class="ion-text-center ion-padding-top" style="width: 100%;">
-          <img class="" src="../../../assets/editpost.svg" alt="icon" style="max-height: 150px; max-width: 150px;"/>
+          <img class="" src="../../../assets/addpost.svg" alt="icon" style="max-height: 150px; max-width: 150px;"/>
         </div>
       </ion-col>
     </ion-row>

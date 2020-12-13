@@ -24,6 +24,12 @@ export class PostService {
   createPost(post: Post){
     return this.db.list('post/').push(post);
   }
+  editPost(key: string, post: Post){
+    return this.db.list('post/').update(key, post);
+  }
+  deletePost(key: string){
+    this.db.list('post/').remove(key);
+  }
 
   likePost(key: string, userId: string, disliked: boolean, itemKey: string){
     if (disliked){

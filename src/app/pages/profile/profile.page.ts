@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import {PostService} from '../../services/post.service';
 import {map} from 'rxjs/operators';
 import {Post} from '../../models/post.model';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +22,7 @@ export class ProfilePage implements OnInit {
       private profileServ: ProfileService,
       private authService: AuthenticationService,
       private postServ: PostService,
+      private alertCtrl: AlertController,
       private router: Router,
   ) { }
 
@@ -49,6 +51,31 @@ export class ProfilePage implements OnInit {
     }else{
       return 0;
     }
+  }
+
+  async presentAlert(key: string){
+    const alert = await this.alertCtrl
+        .create({
+          header: 'Are you sure?',
+          message: 'Do you really want to delete this post?',
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel'
+            },
+            {
+              text: 'Delete',
+              handler: () => {
+                this.deletePost(key);
+              }
+            }
+          ]
+        });
+    await alert.present();
+  }
+
+  deletePost(key: string){
+    this.postServ.deletePost(key);
   }
 
   async signOut(){
