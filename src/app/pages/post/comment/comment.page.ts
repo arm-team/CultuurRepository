@@ -52,10 +52,21 @@ export class CommentPage implements OnInit {
     form.reset();
   }
 
+  deleteComment(key: string){
+    this.postServ.deleteComment(this.postId, key);
+  }
+
   findProfile(uid: string){
     return this.profiles.find(profile => {
       return profile.key === uid;
     });
+  }
+
+  isOwner(cUid: string, currUid: string){
+    if (cUid === currUid){
+      return true;
+    }
+    return false;
   }
 
 }

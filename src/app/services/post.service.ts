@@ -55,4 +55,7 @@ export class PostService {
     };
     this.db.list(`post/${key}/comment/`).push(comment);
   }
+  deleteComment(pKey: string, cKey: string){
+    this.db.list(`post/${pKey}/comment/`).remove(cKey);
+  }
 }
