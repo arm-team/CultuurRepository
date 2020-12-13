@@ -97,14 +97,14 @@ export class PostPage implements OnInit {
   }
 
   likePost(postKey: string, postUid: string, currUid: string, like: any[], dislike: any[]){
-    this.postServ.likePost(postKey, postUid, this.isLikedOrDisliked(dislike, currUid), this.getKey(like, postUid));
+    this.postServ.likePost(postKey, currUid, this.isLikedOrDisliked(dislike, currUid), this.getKey(like, postUid));
   }
   unlikePost(postKey: string, like: any[], postUid: string){
     this.postServ.unlikePost(postKey, this.getKey(like, postUid));
   }
 
   dislikePost(postKey: string, postUid: string, currUid: string, like: any[], dislike: any[]){
-    this.postServ.dislikePost(postKey, postUid, this.isLikedOrDisliked(like, currUid), this.getKey(dislike, postUid));
+    this.postServ.dislikePost(postKey, currUid, this.isLikedOrDisliked(like, currUid), this.getKey(dislike, postUid));
   }
   undislikePost(postKey: string, dislike: any[], postUid: string){
     this.postServ.undislikePost(postKey, this.getKey(dislike, postUid));
