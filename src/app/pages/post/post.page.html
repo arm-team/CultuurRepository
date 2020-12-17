@@ -27,8 +27,11 @@
     <div *ngIf="posts && profiles">
       <div *ngFor="let post of posts" class="ion-margin-bottom">
         <ion-item lines="none">
-          <ion-avatar slot="start">
-            <img src="{{findProfile(post.uid).imageurl}}" alt="">
+          <ion-avatar slot="start" *ngIf="!findProfile(post.uid).imageurl">
+            <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
+          </ion-avatar>
+          <ion-avatar slot="start" *ngIf="findProfile(post.uid).imageurl">
+            <img src="{{findProfile(post.uid).imageurl}}" alt=""/>
           </ion-avatar>
           <ion-label>
             <ion-text><b>{{findProfile(post.uid).username}}</b></ion-text>
@@ -102,8 +105,11 @@
     </div>
     <div *ngIf="post && profile && spot">
       <ion-item lines="none">
-        <ion-avatar slot="start">
-          <img src="{{profile.imageurl}}" alt="">
+        <ion-avatar slot="start" *ngIf="!profile.imageurl">
+          <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
+        </ion-avatar>
+        <ion-avatar slot="start" *ngIf="profile.imageurl">
+          <img src="{{profile.imageurl}}" alt=""/>
         </ion-avatar>
         <ion-label>
           <ion-text><b>{{profile.username}}</b></ion-text>

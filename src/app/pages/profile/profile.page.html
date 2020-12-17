@@ -54,12 +54,11 @@
       </div>
     </div>
 
-
-      <div class="profile-info ion-text-center">
-        <h3 class="name">{{profile.name}}</h3>
-        <h3 class="country">{{profile.email}}</h3>
-      </div>
-
+    <div class="ion-text-center" style="padding: 3em 0">
+      <ion-text><b>{{profile.name}}</b></ion-text>
+      <br>
+      <ion-text><b>{{profile.email}}</b></ion-text>
+    </div>
 
     <!--All post + button Add Post-->
     <ion-item>
@@ -69,7 +68,6 @@
           <ion-icon name="add"></ion-icon>
         </ion-button>
       </ion-buttons>
-
     </ion-item>
 
     <div *ngIf="!posts" style="width: 100%; height: 100%;">
@@ -77,40 +75,47 @@
     </div>
     <!--Tampilan Postingan user-->
     <div *ngIf="posts">
-      <ion-item-sliding #slidingItem *ngFor="let post of posts">
-        <ion-item-options side="start">
-          <ion-item-option color="primary" routerLink="edit-post/{{post.key}}">
-            <ion-icon slot="icon-only" name="create"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
+      <div *ngIf="posts.length <= 0" style="padding: 5em" class="ion-text-center">
+        <img src="assets/unDraw/undraw_void_3ggu.svg" alt="" style="width: 75%">
+        <br>
+        <ion-text color="medium" class="ion-margin-top"><b>No Post...</b></ion-text>
+      </div>
+      <div *ngIf="posts.length > 0">
+        <ion-item-sliding #slidingItem *ngFor="let post of posts">
+          <ion-item-options side="start">
+            <ion-item-option color="primary" routerLink="edit-post/{{post.key}}">
+              <ion-icon slot="icon-only" name="create"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
 
-        <ion-item routerLink="post/{{post.key}}">
-          <ion-grid class="ion-padding">
-            <ion-row>
-              <ion-col size="4" class="ion-no-padding">
-                <ion-img src="{{post.imageurl}}" alt=""></ion-img>
-              </ion-col>
-              <ion-col size="8" style="padding: 0 16px">
-                <div>
-                  <ion-text style="padding: 2px;text-align: justify;margin-top: 5px;overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; line-height: 16px; max-height: 200px; -webkit-box-orient: vertical">{{post.caption}}</ion-text>
-                </div>
-                <div class="ion-text-right bottomed">
-                  <ion-icon name="thumbs-up"></ion-icon> {{countItem(post.like)}}
-                  <ion-icon name="thumbs-down"></ion-icon> {{countItem(post.dislike)}}
-                  <ion-icon name="chatbox-ellipses"></ion-icon> {{countItem(post.comment)}}
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
+          <ion-item routerLink="post/{{post.key}}">
+            <ion-grid class="ion-padding">
+              <ion-row>
+                <ion-col size="4" class="ion-no-padding">
+                  <ion-img src="{{post.imageurl}}" alt=""></ion-img>
+                </ion-col>
+                <ion-col size="8" style="padding: 0 16px">
+                  <div>
+                    <ion-text style="padding: 2px;margin-top: 5px;overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; line-height: 16px; max-height: 200px; -webkit-box-orient: vertical">{{post.caption}}</ion-text>
+                  </div>
+                  <div class="ion-text-right bottomed">
+                    <ion-icon name="thumbs-up"></ion-icon> {{countItem(post.like)}}
+                    <ion-icon name="thumbs-down"></ion-icon> {{countItem(post.dislike)}}
+                    <ion-icon name="chatbox-ellipses"></ion-icon> {{countItem(post.comment)}}
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
 
-        <ion-item-options>
-          <ion-item-option color="danger" (click)="presentAlert(post.key)">
-            <ion-icon name="trash" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
+          <ion-item-options>
+            <ion-item-option color="danger" (click)="presentAlert(post.key)">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
 
-      </ion-item-sliding>
+        </ion-item-sliding>
+      </div>
     </div>
   </div>
 </ion-content>
