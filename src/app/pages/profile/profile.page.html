@@ -71,11 +71,30 @@
 
 
       <!--Header + avatar-->
-      <div class="header">
+      <div *ngIf="!profile.fbanner && !profile.foto" class="header" style="background-image: url('https://akcdn.detik.net.id/community/media/visual/2020/03/20/b86bb4c8-f0b2-4771-83f3-57b723d5ccd4_169.jpeg?w=700&q=90')">
           <div class="avatar">
-              <img src="{{profile.imageurl}}" alt=""/>
+              <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg" alt=""/>
           </div>
       </div>
+
+    <div *ngIf="profile.fbanner && profile.foto" class="header" style="background-image: url('{{profile.fbanner}}')">
+      <div class="avatar">
+        <img src="{{profile.foto}}" alt=""/>
+      </div>
+    </div>
+
+    <div *ngIf="profile.fbanner && !profile.foto" class="header" style="background-image: url('{{profile.fbanner}}')">
+      <div class="avatar">
+        <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg" alt=""/>
+      </div>
+    </div>
+
+    <div *ngIf="!profile.fbanner && profile.foto" class="header" style="background-image: url('https://akcdn.detik.net.id/community/media/visual/2020/03/20/b86bb4c8-f0b2-4771-83f3-57b723d5ccd4_169.jpeg?w=700&q=90')">
+      <div class="avatar">
+        <img src="{{profile.foto}}" alt=""/>
+      </div>
+    </div>
+
 
       <div class="profile-info ion-text-center">
         <h3 class="name">{{profile.name}}</h3>
