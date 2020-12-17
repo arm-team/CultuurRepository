@@ -20,3 +20,26 @@
   border-radius: 50%;
 }
 
+.header {
+  height: 200px;
+  background-size: cover;
+  background-position: 50%;
+
+  .avatar{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  img{
+    width: 100px;
+    height: 100px;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    bottom: calc(-1*(130px + 10px)); // -42px;
+    border: 1px solid #fff;
+    background-color: #fff;
+  }
+}

@@ -1,4 +1,4 @@
-<ion-header xmlns:https="http://www.w3.org/1999/xhtml">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
@@ -6,85 +6,41 @@
     <ion-title>Edit Profile</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <!--Header + avatar-->
+  <div style="margin-bottom: 3em;" *ngIf="loadProfile">
+    <ion-buttons style="position: absolute; top: 0; right: 0;">
+      <ion-button (click)="getPicture('cover')">
+        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <div *ngIf="!loadProfile.coverurl" class="header" style="background-image: url('assets/unDraw/undraw_both_sides_hbv3.svg')">
+      <div class="avatar" *ngIf="!loadProfile.imageurl">
+        <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
+      </div>
+      <div class="avatar" *ngIf="loadProfile.imageurl">
+        <img src="{{loadProfile.imageurl}}" alt=""/>
+      </div>
+    </div>
 
-<ion-content *ngIf="profileData">
-  <div *ngIf="!banner" class="upper-container" style="background-image: url('https://akcdn.detik.net.id/community/media/visual/2020/03/20/b86bb4c8-f0b2-4771-83f3-57b723d5ccd4_169.jpeg?w=700&q=90')">
-    <!--    <div *ngIf="profileData.fbanner" class="upper-container" id="bannerPicture" style="background-image: url('{{profileData.fbanner}}')"  >-->
-    <ion-grid>
-      <ion-row style="margin-top: 30px; margin-bottom: 20px">
-        <ion-col size="12" offset="5">
-          <div class="image-container">
-            <img *ngIf="!photo" src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg" alt=""/>
-            <img id="profilePicture" src="{{photo}}" *ngIf="photo" (load)="imageLoaded()">
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row >
-        <ion-col size="12" >
-          <<ion-buttons class="ion-float-right">
-          <ion-button (click)="presentFotoActionSheet()">
-            <ion-icon slot="icon-only" name="camera"></ion-icon>
-          </ion-button>
-          <ion-button (click)="presentBannerActionSheet()">
-            <ion-icon name="image"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-          <!--<ion-row class="ion-align-items-end ion-justify-content-end">
-            <ion-fab-button color="primary" (click)="presentFotoActionSheet()">
-              <ion-icon name="camera"></ion-icon>
-            </ion-fab-button>
-          </ion-row>-->
-
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <div *ngIf="loadProfile.coverurl" class="header" style="background-image: url('{{loadProfile.coverurl}}')">
+      <div class="avatar" *ngIf="!loadProfile.imageurl">
+        <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
+      </div>
+      <div class="avatar" *ngIf="loadProfile.imageurl">
+        <img src="{{loadProfile.imageurl}}" alt=""/>
+      </div>
+    </div>
+    <ion-fab-button size="small" color="success" style="position: absolute; right: 35%;" (click)="getPicture('image')">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
   </div>
-  <!--  </div>-->
-
-  <div *ngIf="banner" class="upper-container" style="background-image: url('{{profileData.fbanner}}')">
-<!--    <div *ngIf="profileData.fbanner" class="upper-container" id="bannerPicture" style="background-image: url('{{profileData.fbanner}}')"  >-->
-    <ion-grid>
-      <ion-row style="margin-top: 30px; margin-bottom: 20px">
-        <ion-col size="12" offset="5">
-          <div class="image-container">
-            <img *ngIf="!photo" src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg" alt=""/>
-          <img id="profilePicture" src="{{photo}}" *ngIf="photo" (load)="imageLoaded()">
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row >
-        <ion-col size="12" >
-          <<ion-buttons class="ion-float-right">
-              <ion-button (click)="presentFotoActionSheet()">
-                <ion-icon slot="icon-only" name="camera"></ion-icon>
-              </ion-button>
-              <ion-button (click)="presentBannerActionSheet()">
-                <ion-icon name="image"></ion-icon>
-              </ion-button>
-          </ion-buttons>
-          <!--<ion-row class="ion-align-items-end ion-justify-content-end">
-            <ion-fab-button color="primary" (click)="presentFotoActionSheet()">
-              <ion-icon name="camera"></ion-icon>
-            </ion-fab-button>
-          </ion-row>-->
-
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-<!--  </div>-->
-
-
 
   <!--Form EDIT ACCOUNT-->
-  <ion-grid>
+  <ion-grid class="ion-margin-top" *ngIf="loadProfile">
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2">
-        <div *ngIf="profileData">
-          <input type="file" *ngIf="isDesktop" #filePicker (change)="onFileChoose($event)">
-        <form  style="
-          padding: 30px;"
-               #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <form  style="margin: 2em;" #form="ngForm" (ngSubmit)="onSubmit(form)">
           <ion-text style="margin-bottom: 10px;">
             <h2><b>Edit Account</b></h2>
           </ion-text>
@@ -99,7 +55,7 @@
                        name="email"
                        required
                        email
-                       #emailCtrl="ngModel" disabled [(ngModel)]="profileData.email"></ion-input>
+                       #emailCtrl="ngModel" disabled [(ngModel)]="loadProfile.email"></ion-input>
           </ion-item>
           <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
             <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
@@ -113,7 +69,7 @@
                        name="username"
                        required
                        minlength="4"
-                       #userCtrl="ngModel" [(ngModel)]="profileData.username"></ion-input>
+                       #userCtrl="ngModel" [(ngModel)]="loadProfile.username"></ion-input>
           </ion-item>
           <ion-item *ngIf="!userCtrl.valid && userCtrl.touched">
             <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
@@ -126,86 +82,14 @@
                        ngModel
                        name="name"
                        required
-                       #nameCtrl="ngModel" [(ngModel)]="profileData.name"></ion-input>
+                       #nameCtrl="ngModel" [(ngModel)]="loadProfile.name"></ion-input>
           </ion-item>
           <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
             <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
             <ion-label color="danger" style="font-size: small">Name must be filled in correctly.</ion-label>
           </ion-item>
-          <!--Form Cover URL
-          <ion-item>
-            <ion-label position="floating" color="medium">Cover URL</ion-label>
-            <ion-input type="text"
-                       ngModel
-                       name="coverurl"
-                       required
-                       #coverCtrl="ngModel" [(ngModel)]="profileData.coverurl"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!coverCtrl.valid && coverCtrl.touched">
-            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Please insert your URL correctly.</ion-label>
-          </ion-item>
-          &lt;!&ndash;Form Image URL&ndash;&gt;
-          <ion-item>
-            <ion-label position="floating" color="medium">Image URL</ion-label>
-            <ion-input type="text"
-                       ngModel
-                       name="imageurl"
-                       required
-                       #imageCtrl="ngModel" [(ngModel)]="profileData.imageurl"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!imageCtrl.valid && imageCtrl.touched">
-            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Please insert your URL correctly.</ion-label>
-          </ion-item>-->
-          <!--Form Country-->
-          <!--<ion-item>
-            <ion-label position="floating" color="medium">Country</ion-label>
-            <ion-select
-                    type="text"
-                    interface="popover"
-                    ngModel
-                    name="country"
-                    required
-                    #countryCtrl="ngModel">
-              <ion-select-option value="id">Indonesia</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item *ngIf="!countryCtrl.valid && countryCtrl.touched">
-            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Country must be filled in correctly.</ion-label>
-          </ion-item>-->
-          <!--Form Password-->
-          <!--<ion-item>
-            <ion-label position="floating" color="medium">Password</ion-label>
-            <ion-input type="password"
-                       ngModel
-                       name="password"
-                       required
-                       minlength="6"
-                       #passCtrl="ngModel" disabled></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!passCtrl.valid && passCtrl.touched">
-            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Password must be six.</ion-label>
-          </ion-item>
-          &lt;!&ndash;Form Confirm Password&ndash;&gt;
-          <ion-item>
-            <ion-label position="floating" color="medium">Confirm Password</ion-label>
-            <ion-input type="password"
-                       ngModel
-                       name="confirmPass"
-                       minlength="6"
-                       #confirmpassCtrl="ngModel" disabled></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!confirmpassCtrl.valid && confirmpassCtrl.touched || confirmpassCtrl.value !== passCtrl.value">
-            <ion-icon color="danger" name="alert-circle-outline"></ion-icon>
-            <ion-label color="danger" style="font-size: small">Confirm Password doesn't match.</ion-label>
-          </ion-item>-->
-          <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block" [disabled]="!form.valid">Edit Account</ion-button>
-
+          <ion-button style="margin-top: 50px;" type="submit" color="success" expand="block" [disabled]="!form.valid || !form.touched || !form.dirty">Edit Account</ion-button>
         </form>
-        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

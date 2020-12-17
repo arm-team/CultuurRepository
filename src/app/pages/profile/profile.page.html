@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{profile?.username}}</ion-title>
+    <ion-title *ngIf="profile">{{profile.username}}</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="edit-profile">
         <ion-icon name="create-outline" slot="icon-only"></ion-icon>
@@ -34,64 +34,23 @@
   </div>
   <!--Container Atas-->
   <div *ngIf="profile">
-    <!--<div class="upper-container ">
-      <ion-grid>
-        <ion-row style="margin-top: 20px">
-          <ion-col size="12" offset="5">
-            <div class="image-container">
-              <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg" alt=""/>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row style="margin-top: 10px" class="ion-margin-horizontal">
-          <ion-col size="6" class="ion-no-padding">
-            <ion-text class="ion-text-right">{{ profile.name }}</ion-text>
-          </ion-col>
-          <ion-col size="6" class="ion-no-padding">
-            <ion-label class="ion-float-right"> 12</ion-label>
-            <ion-icon name="mail" class="ion-float-right"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-margin-horizontal">
-          <ion-col size="6" class="ion-no-padding" >
-            <ion-text>{{profile.email}}</ion-text>
-          </ion-col>
-          <ion-col size="6" class="ion-no-padding">
-            <ion-label class="ion-float-right"> 50</ion-label>
-            <ion-icon name="heart" class="ion-float-right"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-margin-start">
-          <ion-col size="6" class="ion-no-padding">
-            <ion-text>Indonesia</ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>-->
 
-
-      <!--Header + avatar-->
-      <div *ngIf="!profile.fbanner && !profile.foto" class="header" style="background-image: url('https://akcdn.detik.net.id/community/media/visual/2020/03/20/b86bb4c8-f0b2-4771-83f3-57b723d5ccd4_169.jpeg?w=700&q=90')">
-          <div class="avatar">
-              <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg" alt=""/>
-          </div>
+    <!--Header + avatar-->
+    <div *ngIf="!profile.coverurl" class="header" style="background-image: url('assets/unDraw/undraw_both_sides_hbv3.svg')">
+      <div class="avatar" *ngIf="!profile.imageurl">
+          <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
       </div>
-
-    <div *ngIf="profile.fbanner && profile.foto" class="header" style="background-image: url('{{profile.fbanner}}')">
-      <div class="avatar">
-        <img src="{{profile.foto}}" alt=""/>
+      <div class="avatar" *ngIf="profile.imageurl">
+        <img src="{{profile.imageurl}}" alt=""/>
       </div>
     </div>
 
-    <div *ngIf="profile.fbanner && !profile.foto" class="header" style="background-image: url('{{profile.fbanner}}')">
-      <div class="avatar">
-        <img src="https://www.flaticon.com/svg/static/icons/svg/2302/2302049.svg" alt=""/>
+    <div *ngIf="profile.coverurl" class="header" style="background-image: url('{{profile.coverurl}}')">
+      <div class="avatar" *ngIf="!profile.imageurl">
+        <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
       </div>
-    </div>
-
-    <div *ngIf="!profile.fbanner && profile.foto" class="header" style="background-image: url('https://akcdn.detik.net.id/community/media/visual/2020/03/20/b86bb4c8-f0b2-4771-83f3-57b723d5ccd4_169.jpeg?w=700&q=90')">
-      <div class="avatar">
-        <img src="{{profile.foto}}" alt=""/>
+      <div class="avatar" *ngIf="profile.imageurl">
+        <img src="{{profile.imageurl}}" alt=""/>
       </div>
     </div>
 
