@@ -6,4 +6,6 @@ export interface Profile {
   imageurl: string;
   name: string;
   username: string;
+  foto: string;
+  fbanner: string;
 }
