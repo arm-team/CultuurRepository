@@ -46,4 +46,8 @@ export class AuthenticationService {
   signOut(): Promise<void> {
     return this.afAuth.signOut();
   }
+
+  userDetails(){
+    return this.afAuth.user;
+  }
 }
