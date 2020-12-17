@@ -29,9 +29,7 @@ export class SignupPage implements OnInit {
     const icountry = form.value.country.toString();
     const profile: any = {
       countryid: icountry,
-      coverurl: 'https://i.ibb.co/HXNgjQv/cover.png',
       email: iemail,
-      imageurl: 'https://i.ibb.co/NYR2CH5/image.png',
       name: iname,
       username: iusername,
     };
