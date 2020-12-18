@@ -51,12 +51,12 @@
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <ion-item lines="none">
       <ion-avatar slot="start">
-        <img *ngIf="!findProfile(post.uid).imageurl" src="assets/unDraw/undraw_male_avatar_323b.svg" alt="">
-        <img *ngIf="findProfile(post.uid).imageurl" src="{{findProfile(post.uid).imageurl}}" alt="">
+        <img *ngIf="!findProfile(currentUser.uid).imageurl" src="assets/unDraw/undraw_male_avatar_323b.svg" alt="">
+        <img *ngIf="findProfile(currentUser.uid).imageurl" src="{{findProfile(currentUser.uid).imageurl}}" alt="">
       </ion-avatar>
       <ion-textarea
               type="text"
-              placeholder="Comment as {{findProfile(post.uid).username}}..."
+              placeholder="Comment as {{findProfile(currentUser.uid).username}}..."
               name="comment"
               ngModel
               required
