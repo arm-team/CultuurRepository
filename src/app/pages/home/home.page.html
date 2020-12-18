@@ -36,7 +36,8 @@
         <ion-row>
           <ion-col size="12" size-xs="6" size-sm="4" size-md="3" size-lg="2" *ngFor="let spot of spots">
             <ion-card class="ion-no-padding ion-no-margin card" routerLink="post/{{spot.key}}">
-              <ion-img class="card-image black-transparent" src="{{findPost(spot.key).imageurl}}"></ion-img>
+              <ion-img class="card-image black-transparent" *ngIf="findPost(spot.key)" src="{{findPost(spot.key).imageurl}}"></ion-img>
+              <ion-img class="card-image black-transparent" *ngIf="!findPost(spot.key)" src="{{spot.imageurl}}"></ion-img>
               <div class="centered ion-text-center" style="width: 100%; color: white;">
                 <h6 class="ion-no-margin"><b>{{spot.name}}</b></h6>
                 <ion-text style="font-size: 10px; font-style: italic;">{{ucwords(findRegion(spot.regionid).name)}}</ion-text>
