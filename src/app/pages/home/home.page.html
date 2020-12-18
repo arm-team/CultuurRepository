@@ -13,39 +13,45 @@
     <ion-spinner name="dots" class="centered"></ion-spinner>
   </div>
   <div *ngIf="spots">
-    <ion-slides pager="true">
-      <ng-template ngFor let-spot [ngForOf]="spots" let-i="index">
-        <ion-slide *ngIf="i<3">
-          <img class="carousel-image" src="{{spot.imageurl}}" alt="image"/>
-          <div class="carousel-text-container ion-text-left">
-            <h3 class="carousel-title"><b>{{spot.name}}</b></h3>
-            <p class="carousel-caption">{{spot.caption}}</p>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2">
+          <ion-slides pager="true">
+            <ng-template ngFor let-spot [ngForOf]="spots" let-i="index">
+              <ion-slide *ngIf="i<3">
+                <img class="carousel-image" src="{{spot.imageurl}}" alt="image"/>
+                <div class="carousel-text-container ion-text-left">
+                  <h3 class="carousel-title"><b>{{spot.name}}</b></h3>
+                  <p class="carousel-caption">{{spot.caption}}</p>
+                </div>
+              </ion-slide>
+            </ng-template>
+          </ion-slides>
+          <div class="ion-margin">
+            <h4 style="margin: 0;">Trending Culture</h4>
+            <ion-text style="font-size: 12px; color: #9d9fa6">{{today | date:  'EEEE, MMMM d, y'}}</ion-text>
           </div>
-        </ion-slide>
-      </ng-template>
-    </ion-slides>
-    <div class="ion-margin">
-      <h4 style="margin: 0;">Trending Culture</h4>
-      <ion-text style="font-size: 12px; color: #9d9fa6">{{today | date:  'EEEE, MMMM d, y'}}</ion-text>
-    </div>
-    <div *ngIf="!posts" style="width: 100%; height: 100%;">
-      <ion-spinner name="dots" class="centered"></ion-spinner>
-    </div>
-    <div *ngIf="posts">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" size-xs="6" size-sm="4" size-md="3" size-lg="2" *ngFor="let spot of spots">
-            <ion-card class="ion-no-padding ion-no-margin card" routerLink="post/{{spot.key}}">
-              <ion-img class="card-image black-transparent" *ngIf="findPost(spot.key)" src="{{findPost(spot.key).imageurl}}"></ion-img>
-              <ion-img class="card-image black-transparent" *ngIf="!findPost(spot.key)" src="{{spot.imageurl}}"></ion-img>
-              <div class="centered ion-text-center" style="width: 100%; color: white;">
-                <h6 class="ion-no-margin"><b>{{spot.name}}</b></h6>
-                <ion-text style="font-size: 10px; font-style: italic;">{{ucwords(findRegion(spot.regionid).name)}}</ion-text>
-              </div>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+          <div *ngIf="!posts" style="width: 100%; height: 100%;">
+            <ion-spinner name="dots" class="centered"></ion-spinner>
+          </div>
+          <div *ngIf="posts">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6" size-sm="4" *ngFor="let spot of spots">
+                  <ion-card class="ion-no-padding ion-no-margin card" routerLink="post/{{spot.key}}">
+                    <ion-img class="card-image black-transparent" *ngIf="findPost(spot.key)" src="{{findPost(spot.key).imageurl}}"></ion-img>
+                    <ion-img class="card-image black-transparent" *ngIf="!findPost(spot.key)" src="{{spot.imageurl}}"></ion-img>
+                    <div class="centered ion-text-center" style="width: 100%; color: white;">
+                      <h6 class="ion-no-margin"><b>{{spot.name}}</b></h6>
+                      <ion-text style="font-size: 10px; font-style: italic;">{{ucwords(findRegion(spot.regionid).name)}}</ion-text>
+                    </div>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

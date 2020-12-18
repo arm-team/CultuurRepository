@@ -99,25 +99,6 @@ export class PostPage implements OnInit {
     }
   }
 
-  makeHashtag(str: string){
-    const wordArray = str.split(' ').filter(char => char !== '');
-    let result = '#';
-
-    if (wordArray.length === 0) {
-      return false;
-    }
-
-    result = result + wordArray.map(word => {
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    }).join('');
-
-    if (result.length > 140) {
-      return false;
-    } else{
-      return result;
-    }
-  }
-
   likePost(postKey: string, currUid: string, dislike: any[]){
     this.postServ.likePost(postKey, currUid, this.isLikedOrDisliked(dislike, currUid), this.getKey(dislike, currUid));
   }

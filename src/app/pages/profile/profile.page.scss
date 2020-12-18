@@ -26,6 +26,7 @@
   background-position: 50%;
 
   .avatar{
+    object-fit: cover;
     width: 100px;
     height: 100px;
     position: relative;
@@ -33,6 +34,7 @@
   }
 
   img{
+    object-fit: cover;
     width: 100px;
     height: 100px;
     display: block;

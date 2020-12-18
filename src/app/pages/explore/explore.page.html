@@ -12,55 +12,65 @@
   }
 </style>
 <ion-content>
-  <div class="header-container">
-    <ion-searchbar class="ion-no-padding" placeholder="Search culture destination" (search)="searchByKeyword($event)"></ion-searchbar>
-    <div *ngIf="!regions && isLoading" class="ion-text-center">
-      <ion-spinner name="dots"></ion-spinner>
-    </div>
-    <ion-list *ngIf="regions" class="search-result">
-      <div *ngIf="regions.length === 0">
-        <ion-item>
-          No results found
-        </ion-item>
-      </div>
-      <div *ngIf="regions.length !== 0">
-        <ion-item *ngFor="let region of regions" (click)="selectRegion(region.key)">
-          {{ucwords(region.name)}}
-        </ion-item>
-      </div>
-    </ion-list>
+  <div *ngIf="!selectedRegion" class="centered">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="6" offset-sm="3">
+          <img class="" src="../../../assets/explore.svg" alt="icon" style="width: 100%; height: auto"/>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
-  <div *ngIf="selectedRegion">
-    <div class="header-container">
-      <h4 class="ion-no-margin">Explore</h4>
-      <ion-text>{{ucwords(selectedRegion.name)}}</ion-text>
-    </div>
-    <div class="maps-container">
-      <img style="width: 100%; height: auto" src="{{srcMaps}}" alt=""/>
-    </div>
-    <div class="view-container">
-      <h4>Favorite Culture Destination</h4>
-      <div *ngIf="!spots" style="width: 100%; height: 100%;">
-        <ion-spinner name="dots" class="centered"></ion-spinner>
-      </div>
-      <div *ngIf="spots">
-        <ion-row>
-          <ion-col size="6" *ngFor="let spot of spots" routerLink="view/{{spot.key}}">
-            <ion-card class="ion-no-padding ion-no-margin card" style="border-radius: 15px;">
-              <ion-img class="center-cropped" src="{{spot.imageurl}}" alt=""></ion-img>
-              <ion-card-content style="width: 100%;">
-                <h6 class="ion-no-margin one-line"><b>{{spot.name}}</b></h6>
-                <ion-text style="font-size: 10px;">{{ucwords(selectedRegion.name)}}</ion-text>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </div>
-    </div>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <div class="header-container">
+          <ion-searchbar class="ion-no-padding" placeholder="Search culture destination" (search)="searchByKeyword($event)"></ion-searchbar>
+          <div *ngIf="!regions && isLoading" class="ion-text-center">
+            <ion-spinner name="dots"></ion-spinner>
+          </div>
+          <ion-list *ngIf="regions" class="search-result">
+            <div *ngIf="regions.length === 0">
+              <ion-item>
+                No results found
+              </ion-item>
+            </div>
+            <div *ngIf="regions.length !== 0">
+              <ion-item *ngFor="let region of regions" (click)="selectRegion(region.key)">
+                {{ucwords(region.name)}}
+              </ion-item>
+            </div>
+          </ion-list>
+        </div>
+        <div *ngIf="selectedRegion">
+          <div class="header-container">
+            <h4 class="ion-no-margin">Explore</h4>
+            <ion-text>{{ucwords(selectedRegion.name)}}</ion-text>
+          </div>
+          <div class="maps-container">
+            <img style="width: 100%; height: auto" src="{{srcMaps}}" alt=""/>
+          </div>
+          <div class="view-container">
+            <h4>Favorite Culture Destination</h4>
+            <div *ngIf="!spots" style="width: 100%; height: 100%;">
+              <ion-spinner name="dots" class="centered"></ion-spinner>
+            </div>
+            <div *ngIf="spots">
+              <ion-row>
+                <ion-col size="6" *ngFor="let spot of spots" routerLink="view/{{spot.key}}">
+                  <ion-card class="ion-no-padding ion-no-margin card" style="border-radius: 15px;">
+                    <ion-img class="center-cropped" src="{{spot.imageurl}}" alt=""></ion-img>
+                    <ion-card-content style="width: 100%;">
+                      <h6 class="ion-no-margin one-line"><b>{{spot.name}}</b></h6>
+                      <ion-text style="font-size: 10px;">{{ucwords(selectedRegion.name)}}</ion-text>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-<ion-footer>
-  <div *ngIf="!selectedRegion" class="ion-padding-end">
-    <img class="" src="../../../assets/explore.svg" alt="icon" style="width: 100%; height: auto"/>
-  </div>
-</ion-footer>

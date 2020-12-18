@@ -26,7 +26,8 @@
                         ngModel interface="popover"
                         name="location"
                         required
-                        #locationCtrl="ngModel">
+                        #locationCtrl="ngModel"
+                        [(ngModel)]="post.spotid">
               <ion-select-option *ngFor="let spot of spots" [value]="spot.key">{{spot.name}}</ion-select-option>
             </ion-select>
           </ion-item>

@@ -7,38 +7,40 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <!--Header + avatar-->
-  <div style="margin-bottom: 3em;" *ngIf="loadProfile">
-    <ion-buttons style="position: absolute; top: 0; right: 0;">
-      <ion-button (click)="getPicture('cover')">
-        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <div *ngIf="!loadProfile.coverurl" class="header" style="background-image: url('assets/unDraw/undraw_both_sides_hbv3.svg')">
-      <div class="avatar" *ngIf="!loadProfile.imageurl">
-        <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
-      </div>
-      <div class="avatar" *ngIf="loadProfile.imageurl">
-        <img src="{{loadProfile.imageurl}}" alt=""/>
-      </div>
-    </div>
-
-    <div *ngIf="loadProfile.coverurl" class="header" style="background-image: url('{{loadProfile.coverurl}}')">
-      <div class="avatar" *ngIf="!loadProfile.imageurl">
-        <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
-      </div>
-      <div class="avatar" *ngIf="loadProfile.imageurl">
-        <img src="{{loadProfile.imageurl}}" alt=""/>
-      </div>
-    </div>
-    <ion-fab-button size="small" color="success" style="position: absolute; right: 35%;" (click)="getPicture('image')">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </div>
-
-  <!--Form EDIT ACCOUNT-->
-  <ion-grid class="ion-margin-top" *ngIf="loadProfile">
+  <ion-grid>
     <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3">
+        <!--Header + avatar-->
+        <div style="margin-bottom: 3em;" *ngIf="loadProfile">
+          <ion-buttons style="position: absolute; top: 0; right: 0;">
+            <ion-button (click)="getPicture('cover')">
+              <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <div *ngIf="!loadProfile.coverurl" class="header" style="background-image: url('assets/unDraw/undraw_both_sides_hbv3.svg')">
+            <div class="avatar" *ngIf="!loadProfile.imageurl">
+              <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
+            </div>
+            <div class="avatar" *ngIf="loadProfile.imageurl">
+              <img src="{{loadProfile.imageurl}}" alt=""/>
+            </div>
+          </div>
+
+          <div *ngIf="loadProfile.coverurl" class="header" style="background-image: url('{{loadProfile.coverurl}}')">
+            <div class="avatar" *ngIf="!loadProfile.imageurl">
+              <img src="assets/unDraw/undraw_male_avatar_323b.svg" alt=""/>
+            </div>
+            <div class="avatar" *ngIf="loadProfile.imageurl">
+              <img src="{{loadProfile.imageurl}}" alt=""/>
+            </div>
+          </div>
+          <ion-fab-button size="small" color="success" style="position: absolute; right: 35%;" (click)="getPicture('image')">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top" *ngIf="loadProfile">
       <ion-col size="12" size-sm="8" offset-sm="2">
         <form  style="margin: 2em;" #form="ngForm" (ngSubmit)="onSubmit(form)">
           <ion-text style="margin-bottom: 10px;">
